@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Overview</h2>
+    <ul>
+        <li><strong>Vector Spaces</strong>:
+            <ul>
+                <li>Compare vectors - Metrics (Distance, Inner Product, Angles)</li>
+                <li>Size of Vectors - Norms, Induced norms</li>
+            </ul>
+        </li>
+        <li><strong>Projections onto Subspaces</strong>:
+            <ul>
+                <li>Orthogonality</li>
+                <li>Projection Theorem</li>
+            </ul>
+        </li>
+        <li>Now we want to bring in the idea of "systems" operators and transformations that map vectors in some vector space to vectors in some other vector spaces</li>
+        <!-- Placeholder for images -->
+        <p>In discussing operators, we will generalize the ideas of projection and size of vectors:</p>
+        <ul>
+            <li><strong>Projections</strong>: Generalize to mappings between spaces</li>
+            <li><strong>Size of Vectors</strong>: Generalizes the <em>operator norm</em> (gain)
+                <ul>
+                    <li>What is the largest ratio \(\frac{||\vec{y}||}{||\vec{x}||}\)</li>
+                </ul>
+            </li>
+        </ul>
+    </ul>
+
+    <h2>Linear Operators</h2>
+    <ul>
+        <li><strong>Linear Operators</strong>: Suppose \( X \) and \( Y \) are vector spaces with a scalar field \( R \). We say the operator \( A: X \rightarrow Y \) is a <em>Linear operator</em> if:
+            <div>
+            
+
+\[
+            A(\alpha_1 \vec{x_1} + \alpha_2 \vec{x_2}) = A(\alpha_1 \vec{x_1}) + A(\alpha_2 \vec{x_2})
+            \]
+
+
+            </div>
+            <ul>
+                <li>for all \( \alpha_1, \alpha_2 \in R \) and \( \vec{x_1}, \vec{x_2} \in X \)</li>
+            </ul>
+        </li>
+        <li><strong>Linear Functional</strong>: When \( Y = \mathbb{R} \) or \( \mathbb{C} \), a linear operator \( A: X \rightarrow Y \) is also known as a linear functional</li>
+    </ul>
+
+    <h2>Linear Operators: Matrix Case</h2>
+    <ul>
+        <li>If \( X = \mathbb{R}^n \) and \( Y = \mathbb{R}^m \), any linear operator from \( X \) to \( Y \) can be represented as multiplication by an \( m \times n \) matrix:
+            <div>
+            
+
+\[
+            \begin{bmatrix}
+            y_1 \\
+            y_2 \\
+            \vdots \\
+            y_m
+            \end{bmatrix} = 
+            \begin{bmatrix}
+            a_{11} & a_{12} & \ldots & a_{1n} \\
+            a_{21} & a_{22} & \ldots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{m1} & a_{m2} & \ldots & a_{mn}
+            \end{bmatrix}
+            \begin{bmatrix}
+            x_1 \\
+            x_2 \\
+            \vdots \\
+            x_n
+            \end{bmatrix}
+            \]
+
+
+            </div>
+            <ul>
+                <li>\( \vec{y} = A \vec{x} \)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Operator Norms</h2>
+    <ul>
+        <li><strong>Operator Norms</strong> help us talk about the gain of a system</li>
+        <li><strong>Operator Norms</strong>: Let \( X \) and \( Y \) be normed linear spaces with corresponding norms \( ||*||_X \) and \( ||*||_Y \) and suppose \( A: X \rightarrow Y \) is a linear operator, then the <em>Operator Norm</em> (\(||A||\)) is defined as:
+            <div>
+            
+
+\[
+            ||A|| := \sup_{\vec{x} \in X, \vec{x} \neq \vec{0}} \frac{||A \vec{x}||_Y}{||\vec{x}||_X}
+            \]
+
+
+            </div>
+        </li>
+        <li><strong>Bounded Linear Operator</strong>: A linear operator \( A: X \rightarrow Y \) with operator norm \( ||A|| \) is said to be bounded if \( ||A|| < \infty \)</li>
+    </ul>
+</body>
+</html>

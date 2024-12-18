@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Normed Linear Spaces</h2>
+    <ul>
+        <li>A <strong>norm</strong> is a function used to measure the size of vectors in a vector space</li>
+        <li><strong>Norm</strong> Definition: A norm \( \|*\| \) on a vector space \( S \) (with scalar field \( R = \mathbb{R} \) or \( R = \mathbb{C} \)) is a mapping \( \|*\| : S \rightarrow R \) with the following properties:
+            <ul>
+                <li>\( \|\vec{x}\| \geq 0 \) for all \( \vec{x} \in S \) and \( \|\vec{x}\| = 0 \) if \( \vec{x} = \vec{0} \)</li>
+                <li><strong>Triangle Inequality</strong>: \( \|\vec{x} + \vec{y}\| \leq \|\vec{x}\| + \|\vec{y}\| \) for all \( \vec{x}, \vec{y} \in S \)</li>
+                <li>\( \|a\vec{x}\| = |a| * \|\vec{x}\| \) for any \( a \in R \) and \( \vec{x} \in S \)</li>
+            </ul>
+        </li>
+        <li><strong>Normed Linear Space</strong> Definition: A normed linear space is a vector space \( S \) (with scalar field \( R = \mathbb{R} \) or \( R = \mathbb{C} \)) together with a valid norm \( \|*\| : S \rightarrow R \)</li>
+        <li>Norms give a way to measure distance in a vector space: For any \( \vec{x}, \vec{y} \in S \), we can define the distance between \( \vec{x} \) and \( \vec{y} \) to be:
+            <div>
+            
+
+\[
+            d(\vec{x}, \vec{y}) = \|\vec{x} - \vec{y}\|
+            \]
+
+
+            </div>
+        </li>
+        <li>Keep in mind a norm is a real value (scalar)</li>
+    </ul>
+
+    <h3>\( l_p \) norms and \( l_p \) spaces</h3>
+    <ul>
+        <li>The \( l_p \) metrics for vectors in \( \mathbb{R}^n \) and \( \mathbb{C}^n \) extend naturally to \( l_p \) norms for these spaces:
+            <ul>
+                <li>\( l_1 \) norm: 
+                    <ul>
+                        <li>\( \|\vec{x}\|_1 = \sum_{i=1}^{n} |x_i| \)</li>
+                    </ul>
+                </li>
+                <li>\( l_2 \) norm (<em>Euclidean</em>):
+                    <ul>
+                        <li>\( \|\vec{x}\|_2 = \left( \sum_{i=1}^{n} |x_i|^2 \right)^{\frac{1}{2}} \)</li>
+                    </ul>
+                </li>
+                <li>\( l_p \) norm for \( 1 \leq p \leq \infty \):
+                    <ul>
+                        <li>\( \|\vec{x}\|_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{\frac{1}{p}} \)</li>
+                    </ul>
+                </li>
+                <li>\( l_\infty \) norm:
+                    <ul>
+                        <li>\( \|\vec{x}\|_\infty = \max_{i=1,2,\ldots,n} |x_i| \)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>A given sequence can have an infinite \( l_p \) norm. It is often useful to restrict our attention to those sequences having finite \( l_p \) norm</li>
+        <li><strong>The Space \( l_p \)</strong> Definition: The normed linear space \( l_p \) consists of all infinite sequences of real and complex numbers with \( \|\vec{x}\|_p < \infty \)</li>
+        <li><strong>Theorem (Holder Inequality)</strong>:
+            <ul>
+                <li>Suppose \( 1 \leq p, q \leq \infty \) with \( \frac{1}{p} + \frac{1}{q} = 1 \). For any two sequences \( \vec{x} = (x_1, x_2, \ldots) \in l_p \) and \( \vec{y} = (y_1, y_2, \ldots) \in l_p \):
+                    <div>
+                    
+
+\[
+                    \sum_{i=1}^{\infty} |x_i y_i^*| \leq \|\vec{x}\|_p \|\vec{y}\|_p
+                    \]
+
+
+                    </div>
+                </li>
+                <li>Equality is achieved if \( |\vec{x}_i|^p = \alpha |\vec{y}_i|^q \) for all \( i \), for some \( \alpha \in \mathbb{C} \)</li>
+            </ul>
+        </li>
+        <li>By taking \( p = q = 2 \) in the Holder Inequality, we obtain a widely used corollary</li>
+        <li><strong>Corollary (Cauchy-Schwarz inequality)</strong>:
+            <ul>
+                <li>For any two sequences \( \vec{x} = (x_1, x_2, \ldots) \in l_2 \) and \( \vec{y} = (y_1, y_2, \ldots) \in l_2 \):
+                    <div>
+                    
+
+\[
+                    \sum_{i=1}^{\infty} |x_i y_i^*| \leq \|\vec{x}\|_2 \|\vec{y}\|_2
+                    \]
+
+
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>\( L_p \) norms and \( L_p \) Spaces</h2>
+    <ul>
+        <li>When \( S \) is the set of real or complex valued functions \( x(t) \) on the interval \( t \in [a, b] \), the \( L_p \) metrics extend naturally to the \( L_p \) norms</li>
+        <li>For \( 1 \leq p \leq \infty \) the \( L_p([a, b]) \) norm of a function \( x(t) \) is:
+            <div>
+            
+
+\[
+            \|\vec{x}\|_p = \|x(t)\|_p = \left( \int_{a}^{b} |x(t)|^p \, dt \right)^{\frac{1}{p}}
+            \]
+
+
+            </div>
+        </li>
+        <li><strong>The Space \( L_p \)</strong> Definition: The normed linear space \( L_p([a, b]) \) consists of all real or complex valued functions \( x(t) \) on the interval \( t \in [a, b] \) with \( \|\vec{x}\|_p < \infty \)</li>
+    </ul>
+</body>
+</html>

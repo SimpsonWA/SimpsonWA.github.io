@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Vector Spaces</h2>
+
+    <ul>
+        <li>A metric merely gives us a notion of closeness between elements of a set. With vector spaces, we get more geometric structure, including the ability to talk about the "size" of elements in a set, subspaces, bases, dimensions, etc.</li>
+        <li>
+            A <strong>Vector Space</strong> \(S\) is composed of a set of elements (called "vectors") and members of a field \(R\) (called "scalars").
+            <ul>
+                <li>Roughly, vectors are objects that can be added together and multiplied by numbers (namely scalars).</li>
+                <li>A field is a set of numbers for which addition and multiplication are well-defined. We will typically use \(R = \mathbb{R}\) or \(R = \mathbb{C}\).</li>
+            </ul>
+        </li>
+        <li>In a vector space, there are two rules for combining vectors and scalars:
+            <ol>
+                <li>
+                    <strong>Vector Addition</strong>: Associates any two vectors \(\vec{x}, \vec{y} \in S\) with the sum \(\vec{x} + \vec{y}\), which also belongs to \(S\). Vector addition must obey the following four rules:
+                    <ul>
+                        <li><strong>Commutativity</strong>: \(\vec{x} + \vec{y} = \vec{y} + \vec{x}, \forall \vec{x}, \vec{y} \in S\).</li>
+                        <li><strong>Associativity</strong>: \(\vec{x} + (\vec{y} + \vec{z}) = (\vec{x} + \vec{y}) + \vec{z}, \forall \vec{x}, \vec{y}, \vec{z} \in S\).</li>
+                        <li>There is a unique <em>zero vector</em> \(\vec{0} \in S\) such that \(\vec{x} + \vec{0} = \vec{x}, \forall \vec{x} \in S\).</li>
+                        <li>For each \(\vec{x} \in S\), there is a vector \(-\vec{x} \in S\) such that \(\vec{x} + (-\vec{x}) = \vec{0}\).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Vector Multiplication</strong>: Associates any vector \(\vec{x} \in S\) and any scalar \(a \in R\) with the scalar multiple \(a\vec{x}\), which belongs to \(S\). Vector multiplication must obey the following four rules:
+                    <ul>
+                        <li><strong>Distributivity</strong>: \(a(\vec{x} + \vec{y}) = a\vec{x} + a\vec{y}\) and \((a+b)\vec{x} = a\vec{x} + b\vec{x}, \forall \vec{x}, \vec{y} \in S, a, b \in R\).</li>
+                        <li><strong>Associativity</strong>: \((ab)\vec{x} = a(b\vec{x}), \forall \vec{x} \in S, a, b \in R\).</li>
+                        <li>For the multiplicative identity \(1 \in R\), \(1\vec{x} = \vec{x}, \forall \vec{x} \in S\).</li>
+                        <li>For the additive identity \(0 \in R\), \(0\vec{x} = \vec{0}, \forall \vec{x} \in S\).</li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong>Infinite Sequence</strong>: An infinite sequence of real numbers has the form \(\vec{x} = (x_1, x_2, \dots)\), with each \(x_k \in \mathbb{R}\).
+        </li>
+        <li>
+            <strong>Bounded Infinite Sequence</strong>: An infinite sequence of real numbers is said to be bounded if there exists a constant \(M\) such that \(|x_k| < M, \forall k = 1, 2, \dots\).
+        </li>
+        <li>
+            <strong>Cartesian Product</strong>: Suppose \(X\) and \(Y\) are two vector spaces with the same scalar field \(R\). The Cartesian product \(X \times Y\) is the set of all ordered pairs \((\vec{x}, \vec{y})\) with \(\vec{x} \in X\) and \(\vec{y} \in Y\). With the scalar field \(R\) and the following definitions of vector addition and multiplication, \(X \times Y\) is a valid vector space:
+            <ul>
+                <li>Addition on \(X \times Y\) is defined component-wise:
+                    \[
+                    (\vec{x}_1, \vec{y}_1) + (\vec{x}_2, \vec{y}_2) = (\vec{x}_1 + \vec{x}_2, \vec{y}_1 + \vec{y}_2)
+                    \]
+                </li>
+                <li>Scalar multiplication on \(X \times Y\) is defined by:
+                    \[
+                    a(\vec{x}, \vec{y}) = (a\vec{x}, a\vec{y})
+                    \]
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Linear Subspaces</h2>
+    <ul>
+        <li>
+            <strong>Linear Subspace</strong>: A nonempty subset \(T\) of a vector space \(S\) (with scalar field \(R\)) is called a subspace (or linear subspace) of \(S\) if it contains \(\vec{0}\) and \(a\vec{x} + b\vec{y} \in T, \forall \vec{x}, \vec{y} \in T, a, b \in R\) (i.e., \(T\) is closed under weighted vector addition).
+        </li>
+    </ul>
+    <h2>Linear Combinations</h2>
+    <ul>
+        <li>Linear combinations are used to build new vectors as a weighted sum of other vectors</li>
+        <li><strong>Linear Combination</strong>: let \( M = \{\vec{v_1},\vec{v_2},.....,\vec{v_m}\} \) be a collection of vectors in a vector space \( S \).
+            <ul>
+                <li>A linear combination of vectors \( M \) is a sum of the form:
+                    <div>
+                    
+
+\[
+                    \sum_{i=1}^{n} a_i \vec{v_i} = a_1 \vec{v_1} + a_2 \vec{v_2} + \ldots + a_n \vec{v_n}
+                    \]
+
+
+                    </div>
+                </li>
+                <li>for some \( a_1, a_2, \ldots, a_n \in R \)</li>
+            </ul>
+        </li>
+        <li><strong>Span</strong>: Let \( M = \{\vec{v_1},\vec{v_2},.....,\vec{v_m}\} \) be a finite collection of vectors in the vector space \( S \). The span of \( M \), denoted by \( \text{span}(M) \) or \( \text{span}\{\vec{v_1},\vec{v_2},.....,\vec{v_m}\} \), is the set of all linear combinations of vectors in \( M \):
+            <div>
+            
+
+\[
+            \text{span}(M) = \left\{ \sum_{i=1}^{n} a_i \vec{v_i} : a_i \in R \right\}
+            \]
+
+
+            </div>
+        </li>
+    </ul>
+
+    <h2>Linear Dependence and Linear Independence</h2>
+    <ul>
+        <li><strong>Linear Dependence</strong>: A finite set of vectors \( \vec{v_1},\vec{v_2},.....,\vec{v_n} \) in a vector space \( S \) is said to be linearly dependent if there exist scalars \( a_1, a_2, \ldots, a_n \in R \) not all equal to zero such that:
+            <div>
+            
+
+\[
+            a_1 \vec{v_1} + a_2 \vec{v_2} + \ldots + a_n \vec{v_n} = \vec{0}
+            \]
+
+
+            </div>
+        </li>
+        <li><strong>Linear Independence</strong>: A finite set of vectors \( \vec{v_1},\vec{v_2},.....,\vec{v_n} \) in a vector space \( S \) is linearly independent if:
+            <div>
+            
+
+\[
+            a_1 \vec{v_1} + a_2 \vec{v_2} + \ldots + a_n \vec{v_n} = \vec{0}
+            \]
+
+
+            </div>
+            <ul>
+                <li>only when all \( a_k = 0 \)</li>
+                <li>Every vector in a span of a linearly independent set of vectors has a unique expansion in terms of those vectors:
+                    <ul>
+                        <li>Suppose \( \vec{v_1},\vec{v_2},.....,\vec{v_n} \) are linearly independent and suppose:
+                            <div>
+                            
+
+\[
+                            \vec{x} = a_1 \vec{v_1} + a_2 \vec{v_2} + \ldots + a_n \vec{v_n} = b_1 \vec{v_1} + b_2 \vec{v_2} + \ldots + b_n \vec{v_n}
+                            \]
+
+
+                            </div>
+                            <li>for some scalars \( a_1, a_2, \ldots, a_n \in R \) and \( b_1, b_2, \ldots, b_n \in R \), then \( a_k = b_k \) for \( k=1,2,\ldots,n \)</li>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Bases and Dimensions</h2>
+    <ul>
+        <li><strong>Basis</strong>: A finite set of vectors \( \vec{v_1},\vec{v_2},.....,\vec{v_n} \) in a vector space \( S \) is said to be a basis for \( S \) if the following are true:
+            <ul>
+                <li>\(\vec{v_1},\vec{v_2},.....,\vec{v_n} \) are linearly independent</li>
+                <li>\( \text{span}\{\vec{v_1},\vec{v_2},.....,\vec{v_n}\} = S \)</li>
+                <li>a vector space with a finite basis is said to be finite-dimensional</li>
+            </ul>
+        </li>
+        <li>Any 2 bases for a finite-dimensional vector space contain the same number of elements. This leads to the definition of Dimension:
+            <ul>
+                <li><strong>Dimension</strong>: For a vector space \( S \) that can be spanned using a finite set of basis vectors, the dimension of \( S \) is the number of vectors required in any basis for \( S \)</li>
+                <li>For a vector space \( S \) that cannot be spanned using a finite set of basis vectors, the dimension \( S \) is said to be infinite.</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

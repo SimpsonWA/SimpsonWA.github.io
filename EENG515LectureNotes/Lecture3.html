@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Metric Spaces</h2>
+    <ul>
+        <li>A metric space is a set \( X \) together with a valid metric \( d: X \times X \rightarrow \mathbb{R} \) which gives us a measurement of distance between points in a set \( X \)</li>
+        <li>Suppose \( X \) is a set. Then \( d: X \times X \rightarrow \mathbb{R} \) is a valid metric for \( X \) if the following properties are satisfied for all \( x, y \in X \):
+            <ul>
+                <li>\( d(x, y) = d(y, x) \) (<strong>Symmetry Property</strong>): Distance is independent of direction</li>
+                <li>\( d(x, y) \geq 0 \) (<strong>non-negative</strong>)</li>
+                <li>\( d(x, y) = 0 \) if \( x = y \): The distance between \( x \) and \( y \) is 0 only if \( x = y \)</li>
+                <li>(<strong>Triangle Inequality</strong>) For all \( x, y, z \in X \):
+                    <ul>
+                        <li>\( d(x, z) \leq d(x, y) + d(y, z) \)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Examples (Metrics for \( \mathbb{R}^n \)):
+            <ul>
+                <li>\( l_1 \) metric: 
+                    <ul>
+                        <li>\( d(x, y) = \sum_{i=1}^{n} |x_i - y_i| \)</li>
+                    </ul>
+                </li>
+                <li>\( l_2 \) metric (<em>Euclidean</em>):
+                    <ul>
+                        <li>\( d(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^2 \right)^{1/2} \)</li>
+                    </ul>
+                </li>
+                <li>\( l_p \) metric for \( 1 \leq p \leq \infty \):
+                    <ul>
+                        <li>\( d(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{1/p} \)</li>
+                    </ul>
+                </li>
+                <li>\( l_\infty \) metric:
+                    <ul>
+                        <li>\( \max_{i=1,2,....,n} |x_i - y_i| \)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Metrics for Function Spaces</h2>
+    <ul>
+        <li>When \( X \) is the set of real or complex functions \( x(t) \) on the interval \( t \in [a, b] \), a common choice is the \( l_p \) metric for \( 1 \leq p \leq \infty \):
+            <div>
+            
+
+\[
+            d(x, y) = \left( \int_{a}^{b} |x(t) - y(t)|^p \, dt \right)^{1/p}
+            \]
+
+
+            </div>
+        </li>
+        <li>And for \( p = \infty \) the \( l_\infty \) metric:
+            <div>
+            
+
+\[
+            d(x, y) = \sup_{t \in [a, b]} |x(t) - y(t)|
+            \]
+
+
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

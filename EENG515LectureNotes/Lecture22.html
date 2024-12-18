@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <ul>
+<li>Single Value Decomposition (SVD) gives us a way to factor non-square matrices</li>
+</ul>
+
+<h2>SVD Fundamentals: Factorization and Terminology</h2>
+
+<ul>
+<li>Let \(A\) be an \(m \times n\) matrix with real or complex entries (ie any matrix)</li>
+<li>Then \(A\) can be factored as:
+$$
+A = U \Sigma V^H
+$$</li>
+<li>\(U\) is \(m \times m\) and unitary</li>
+<li>\(\Sigma\) is \(m \times n\) and diagonal</li>
+<li><p>\(V\) is \(n \times n\) and unitary</p></li>
+<li><p>Let \(P = min(m,n)\) then \(\Sigma\) has the form (with \(\Sigma_{1} \in \mathbb{R}^{P \times P}\)) if \(P = m \leq n\)
+$$
+\Sigma =
+\left[
+\begin{array}{cccc|ccc} 
+\sigma_{1} &amp; 0 &amp; ... &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+0 &amp; \sigma_2 &amp; ... &amp; 0 &amp; . &amp; ... &amp; . \\
+. &amp; ... &amp; ... &amp; 0 &amp; . &amp; ... &amp; . \\<br />
+  0 &amp; 0 &amp; ... &amp; \sigma_p &amp; 0 &amp; ... &amp; 0 \\
+ \end{array}
+\right] =
+\left[
+\begin{array}{c|c} 
+\Sigma_{1}&amp; \vec{0}_{m \times(n-m)}
+ \end{array}
+ \right]
+$$</p></li>
+<li>\(\Sigma\) has the form (with \(\Sigma_{1} \in \mathbb{R}^{P \times P}\)) if \(m \geq n =P\) 
+![[Pasted image 20240927192816.png]]</li>
+</ul>
+
+<h3>Terminology:</h3>
+
+<ul>
+<li>The element \(\sigma_1,\sigma_3,...,\sigma_p\) are known as <strong>singular values</strong> of \(A\).</li>
+<li>For any matrix \(A\) the singular values are always real and non-negative and usually ordered:
+$$
+\sigma_{1}\geq \sigma_{2}\geq ... \geq \sigma_{p}\geq 0
+$$</li>
+<li>The columns of \(U\) are known as the left singular values of \(A\)</li>
+<li>The columns of \(V\) (or rows of \(V^{H}\)) are known as the right singular vectors of \(A\)</li>
+</ul>
+
+<h2>SVD Fundamentals: 3-Step Interpretation:</h2>
+
+<ul>
+<li>We have \(A = U \Sigma V^{H}\) so we say \(\vec{y} = A\vec{x} = U \Sigma V^{h} \vec{x}\)
+<h3>Step-by-Step:</h3></li>
+</ul>
+
+<h4>1.)</h4>
+
+<ul>
+<li>Transform and Analyze \(\vec{\alpha} = V^{H} \vec{x}\) computes:
+$$
+\begin{align}
+\alpha_{2}= \vec{V_{i}\vec{x}}= &lt;\vec{x},\vec{V_1}&gt;
+\end{align}
+$$</li>
+<li>For \(i = 1,2,3,...,n\)</li>
+</ul>
+
+<h4>2.)</h4>
+
+<ul>
+<li><strong>Scale</strong>: The multiplication \(\Sigma \vec{\alpha}\) zeros out all but the 1st \(p\) elements of the length-n vector \(\vec{\alpha}\), Then scales these elements by \(\sigma_{1}, \sigma_{2},..., \sigma_{p}\). The result is then truncated or zero-padded to create a vector of length \(m\)<br />
+<h2>SVD Connection to eigen decompositions</h2></li>
+</ul>
+
+<h1>ADD THE EIGENVECTOR THING</h1>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h1>Classification</h1>
+
+<ul>
+<li>The goal of classification is to take an input \(\vec{x}\) and to assign it to one of the K dimensional classes \(c_k\) where \(k=1,2,...,K\)
+<ul>
+<li>Most commonly classes are taken to be <strong>disjoint</strong> so that each input is assigned to 1 and only 1 class</li>
+<li>The input space can there by be divided into <strong>decision regions</strong> whose boundaries are called <strong>decision boundaries</strong> or <strong>decision surfaces</strong></li>
+</ul></li>
+<li>Linear models for classification: defined by that the decision surfaces are linear functions of the input vector \(\vec{x}\) and hence are defined by (D-1)-dimensional hyperplanes within D-dimensional input space</li>
+</ul>
+
+<h1>Linear models for Classification</h1>
+
+<ul>
+<li>Suppose we attempt to learn a linear model with transformation vector \(\vec{w}\) using a non-linear function \(f(\cdot)\) so that: 
+$$
+y(\vec{x}) = f(\vec{w}^{T}\vec{x}+w_{0})
+$$</li>
+<li>\(f(\cdot)\) is called the <strong>activation function</strong>, and its inverse is called the <strong>link function</strong></li>
+<li>The decision surfaces correspond to \(y(x) =const\) so that:
+<ul>
+<li>\(\vec{w}^{T}\vec{x}+w_{0} = const\)</li>
+<li>Thus the decision surfaces are linear functions of \(\vec{x}\) even if the function \(f(\cdot)\) is non-linear</li>
+</ul></li>
+<li><p><strong>Linearly separable</strong>: Dataset whose classes can be separated by linear decision surfaces. </p>
+
+<h1>Target Value of Classification</h1></li>
+<li><p>Target values of a classification problem is used to represent class labels, which are also called indications</p></li>
+<li><strong>Binary Classification</strong>: 2 classes \(c_{1}\) and \(c_{2}\): \(t \in [0,1]\) 
+$$
+t = \begin{cases}  0, \quad if \ data \ belongs \ to \ c_{1} \
+1, \quad if \ data \ belongs \ to \ c_{2}
+\end{cases}
+$$</li>
+<li><strong>Multiclass Classification</strong>: multiple K classes \({c_{k}}_{k=1}^{K}\) : 1 of K coding scheme:
+<ul>
+<li>\(\vec{t}\) is a vector of length \(K\) such that if class is \(c_{j}\) then if all elements \(t_{k}\) of \(\vec{t}\) are zero except for \(t_{j}\) which takes the value 1</li>
+<li>Example: \(K=5\) and \(\vec{t} = (0,1,0,0,0)^{T}\)</li>
+</ul></li>
+</ul>
+
+<h1>Classification Matrix</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Prediction</th>
+            <th>w = 1</th>
+            <th>w = 0</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>&alpha; = 1</td>
+            <td>TP</td>
+            <td>FP</td>
+            <td>PPV</td>
+        </tr>
+        <tr>
+            <td>&alpha; = 0</td>
+            <td>FN</td>
+            <td>TN</td>
+            <td>NPV</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>SENS</td>
+            <td>SPEC</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+- TP: True Positive
+- FP: False Positive
+- TN: True Negative
+- FN: False Negative
+- <strong>Sensitivity</strong> : \(SENS = \frac{TP}{TP + FN}\)
+- <strong>Specificity</strong>: \(SPEC = \frac{TN}{TN+FP}\)
+- <strong>Positive predictive Value</strong>: \(PPV = \frac{TP}{TP+FP}\)
+- <strong>Negative Predictive Value</strong>: \(NPV = \frac{TN}{TN+FN}\)</p>
+
+</body>
+</html>

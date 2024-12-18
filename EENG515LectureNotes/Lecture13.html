@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Range Space</h2>
+    <p>Let \( A:X\rightarrow Y \) be a linear operator between 2 vector spaces \( X \) and \( Y \), the <b>Range</b> or <b>range space</b> of \( A \) (denoted \( \cal{R}(A) \)) is:</p>
+    <p>
+        
+
+\[
+        \cal{R}(A):=\{\vec{y} \in Y: A\vec{x}=\vec{y} \quad \text{for some} \ \vec{x}\in X\}
+        \]
+
+
+    </p>
+    <p>The range space is a linear subspace of \( Y \).</p>
+
+    <h2>Null Space</h2>
+    <p>Let \( A:X\rightarrow Y \) be a linear operator between 2 vector spaces \( X \) and \( Y \). The <b>Null Space</b> or <b>Null</b> denoted \( \cal{N}(A) \) is:</p>
+    <p>
+        
+
+\[
+        \cal{N}(A):=\{\vec{x} \in X: A\vec{x}=\vec{0} \in Y\}
+        \]
+
+
+    </p>
+    <p>The null space is a linear subspace of \( X \).</p>
+
+    <h2>Four Fundamental Subspaces of a Linear Operator</h2>
+    <p>When \( X \) and \( Y \) are inner product spaces, we can talk about the <b>Range Space</b> of \( A^{*} \) (which is the linear subspace of \( X \)) and the <b>Null Space</b> of \( A^{*} \) (which is a linear subspace of \( Y \)). We then have <b>4 Fundamental Subspaces of a Linear Operator</b>:</p>
+    <p>
+        
+
+\[
+        \begin{align*}
+        \cal{R}(A) & := \{\vec{y} \in Y: A\vec{x}=\vec{y} \quad \text{for some} \ \vec{x}\in X\} \\
+        \cal{N}(A) & :=\{\vec{x} \in X: A\vec{x}=\vec{0} \in Y\} \\
+        \cal{R}(A^{*}) & :=\{\vec{x} \in X: A^{*}\vec{y}=\vec{x} \quad \text{for some} \ \vec{y}\in Y\} \\
+        \cal{N}(A^{*}) & :=\{\vec{y} \in Y: A^{*}\vec{x}=\vec{0} \in Y\}
+        \end{align*}
+        \]
+
+
+    </p>
+
+    <!-- Existing sections -->
+
+    <h2>Fundamental Subspaces: Matrix Case</h2>
+    <p>Again, consider a case where \( X = \mathbb{R}^n \) and \( Y = \mathbb{R}^m \). Recall \( A:X\rightarrow Y \) can be represented as multiplication by an \( m \times n \) matrix.</p>
+    <p>When \( A \) is a matrix, \( \cal{R}(A) \) is just the span of columns of \( A \) and \( \cal{R}(A^{*}) \) is just the span of rows of \( A \)</p>
+    <p>
+        
+
+\[
+        \begin{align}
+        \cal{R}(A) = \text{colspan}(A) \\
+        \cal{R}(A^*) = \text{rowspan}(A)
+        \end{align}
+        \]
+
+
+    </p>
+    <p><b>Matrix Rank</b>: The <b>Rank</b> of a matrix equals the dimension of its column span and the dimension of its row span:</p>
+    <p>
+        
+
+\[
+        \text{rank}(A) = \text{dim}(\cal{R}(A)) = \text{dim}(\cal{R}(A^{*}))
+        \]
+
+
+    </p>
+    <p>We say that \( A \) is
+        <ul>
+            <li><b>Full Rank</b>: if \( \text{rank}(A) = \min\{m,n\} \)</li>
+            <li><b>Rank Deficient</b> if it is not full rank</li>
+        </ul>
+    </p>
+    <p>The rank of \( A \) relates to the dimensions of its four fundamental subspaces:</p>
+    <ul>
+        <li>\( \text{dim}(\cal{R}(A)) = \text{rank}(A) = \text{dim(colspan(A))} \)</li>
+        <li>\( \text{dim}(\cal{N}(A)) = n - \text{rank}(A) \)</li>
+        <li>\( \text{dim}(\cal{R}(A^*)) = \text{rank}(A) = \text{dim(rowspan(A))} \)</li>
+        <li>\( \text{dim}(\cal{N}(A^*)) = m - \text{rank}(A) \)</li>
+    </ul>
+    <p>Note for any \( m \times n \) matrix \( A \):
+        <ul>
+            <li>\( \text{dim}(\cal{R}(A)) + \text{dim}(\cal{N}(A)) = n \) (number of columns of \( A \))</li>
+            <li>\( \text{dim}(\cal{R}(A^*)) + \text{dim}(\cal{N}(A^*)) = m \) (number of rows of \( A \))</li>
+            <li>\( \text{dim}(\cal{R}(A)) + \text{dim}(\cal{N}(A^*)) = m \) (number of rows of \( A \))</li>
+            <li>\( \text{dim}(\cal{R}(A^*)) + \text{dim}(\cal{N}(A)) = n \) (number of columns of \( A \))</li>
+        </ul>
+    </p>
+    <p>Additionally for 2 matrices \( A \) and \( B \):
+        <ul>
+            <li>\( \text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\} \)</li>
+            <li>\( \text{rank}(A+B) \leq \text{rank}(A) + \text{rank}(B) \)</li>
+        </ul>
+    </p>
+
+    <h2>Projection Operators</h2>
+    <p>A linear operator \( P:X\rightarrow X \) from a vector space \( X \) into itself is called a <b>projection operator</b> or <b>idempotent</b> if:</p>
+    <p>
+        
+
+\[
+        P^2 = P
+        \]
+
+
+    </p>
+    <p><b>Orthogonal Projection</b>: A projection operator \( P \) in an inner product space \( X \) is called an <b>orthogonal projection</b> if \( \cal{R}(P) \perp \cal{N}(P) \) (i.e., if \( \langle \vec{x}, \vec{y} \rangle = 0 \) for all \( \vec{x} \in \cal{R}(P) \) or \( \vec{x} \in \cal{N}(P) \))</p>
+    <p>A bounded linear operator \( P: X\rightarrow X \) on an inner product space \( X \) is an orthogonal projection if:
+        <ul>
+            <li>P is <b>Idempotent</b>: \( P^2 = P \)</li>
+            <li>P is <b>Self-adjoint</b>: \( P = P^* \)</li>
+        </ul>
+    </p>
+    <p>As mentioned before, the minimizing vector \( \vec{x}' \) is referred to as the orthogonal projection of \( \vec{x} \) onto \( T \).
+        <ul>
+            <li>In other words, \( \vec{x}' = P \vec{x} \) where P is an orthogonal projection operator with \( \cal{R}(P) = T \)</li>
+        </ul>
+    </p>
+
+    <h2>Projection Operators: Matrix Case</h2>
+    <p>Consider \( X = \mathbb{R}^n \) or \( \mathbb{C}^n \) and \( P:X\rightarrow X \) can be represented as multiplication by an \( n \times n \) matrix. Then:
+        <ul>
+            <li>An \( n \times n \) matrix \( P \) is a projection if \( P^2 = P \)</li>
+            <li>An \( n \times n \) matrix \( P \) is an <b>orthogonal projection</b> if \( P^2 = P \) and \( P^{H} = P \)</li>
+        </ul>
+    </p>
+    <p>There is a recipe for constructing projection matrices in \( X = \mathbb{R}^n \) or \( \mathbb{C}^n \). Consider a set of \( m \) linearly independent vectors \( \vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n \) in \( \mathbb{R}^n \) or \( \mathbb{C}^n \).</p>
+    <p>We can construct an orthogonal projection matrix \( P \) onto the subspace \( T \) which spans the vectors as follows:
+        <ul>
+            <li>Construct an \( n \times n \) matrix where \( \text{colspan}(A) = T \)</li>
+        </ul>
+    </p>
+    <p>
+        
+
+\[
+        A = [\vec{v_1} \ \vec{v_2} \ \ldots \ \vec{v_n}]
+        \]
+
+
+    </p>
+    <p>Let:
+        <ul>
+            <li>
+                
+
+\[
+                P = A(A^{H}A)^{-1}A^{H}
+                \]
+
+
+            </li>
+        </ul>
+    </p>
+
+
+</body>
+</html>

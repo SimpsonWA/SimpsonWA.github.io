@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <ul>
+<li><strong>Main Idea</strong>: find projection to a line such that samples from different classes are well separated</li>
+<li>Suppose we have 2 classes and d-dimensional samples \(x_1,\dots,x_{n}\) where:
+<ul>
+<li>\(n_{1}\): samples from class 1</li>
+<li>\(n_{2}\): samples from class 2</li>
+</ul></li>
+<li>Now consider a projection on a line. Let the line direction be given by the unit-vector \(v\):
+<ul>
+<li>Scalar \(v^{t}x_{i}\) is the distance of projection of \(x_{i}\) from the origin</li>
+<li>Thus \(v^{t}x_{i}\) is the projection of \(x_{i}\) into on one dimensional subspace</li>
+<li>So the projection of sample \(x_{i}\) onto a line in the direction \(v\) is given by \(v^{t}x_{i}\)</li>
+</ul></li>
+<li>Let \(\hat{\mu_{1}}\) and \(\hat{\mu_{2}}\) be means of the projections of classes 1 and 2</li>
+<li>Let \(\mu_{1}\) and \(\mu_{2}\) be means of the classes 1 and 2
+$$
+\hat{\mu_{1}} = \frac{1}{n_{i}}\sum\limits_{x_{i}\in C_{1}}^{n_{1}} v^{t}x_{i}= v^{t}\mu_{1}
+$$
+$$
+\hat{\mu_{2}} = \frac{1}{n_{i}}\sum\limits_{x_{i}\in C_{2}}^{n_{2}} v^{t}x_{i}= v^{t}\mu_{2}
+$$</li>
+<li>We can take the distance between these means of projections as 
+$$
+|\hat{\mu_{1}} - \hat{\mu_{2}}|
+$$</li>
+<li>We have samples \(z_{1},\cdots,z_{n}\) where sample mean is
+$$
+\mu_{z}= \frac{1}{n} \sum\limits_{i=1}^{n} z_{i}
+$$</li>
+<li>We can define their <strong>scatter</strong> as:
+$$
+S = \sum\limits_{i=1}^{n} (z_{i}- \mu_{z})^{2}
+$$</li>
+<li>So a scatter is just sample variance multiplied by n, which measures the same thing as variance (spread of data), but it just on a different scale</li>
+<li><strong>Fisher solution</strong>: normalize \((\hat{\mu_{1}} -\hat{\mu_2})\) by scatter </li>
+<li>So let \(y_{i}=v^{t}x_{i}\) (\(y_{i}\)'s are the projected samples)</li>
+<li>Scatter for projected samples of class 1 are:
+$$
+\hat{S_{1}}^{2} = \sum\limits_{y_{i}\in C_{1}} (y_{i}-\hat{\mu_{1}})^{2}
+$$
+$$
+\hat{S_{2}}^{2} = \sum\limits_{y_{i}\in C_{1}} (y_{i}-\hat{\mu_{2}})^{2}
+$$</li>
+<li>So Fishers linear discriminant is to project on line in direction of \(v\) which maximizes:
+$$
+J(v) = \frac{(\hat{\mu_{1}} - \hat{\mu_{2}})^{2}}{\hat{S_{1}}^{2}+\hat{S_{2}}^{2}}
+$$</li>
+<li>If we can find a \(v\) such that \(J(v)\) is large we are guaranteed that the classes are separated. So we want to solve for \(v\) such that \(J(v)\) is maximized</li>
+<li>Define the separate class scatter matrices for classes 1 and 2. These measure the scatter of original samples \(x_{i}\):
+$$
+S_{1} = \sum\limits_{x_{i}\in C_{1}} (x_{i}-\mu_{1})(x_{i}-\mu_{1})^t
+$$
+$$
+S_{2} = \sum\limits_{x_{i}\in C_{2}} (x_{i}-\mu_{2})(x_{i}-\mu_{2})^t
+$$</li>
+<li>Now define a <strong>Within Scatter</strong> Matrix:
+$$
+S_{w}=S_{1}+S_{2}
+$$</li>
+<li>Using some math and previous equations we can say:
+$$
+\hat{S_{1}}^{2}+\hat{S_{2}}^{2} = v^{t}S_{w}v
+$$</li>
+<li>We can also define a <strong>between the class Scatter</strong> matrix (this measures the separation between the 2 means of the 2 classes):
+$$
+S_{B}= (\mu_{1}-\mu_{2})(\mu_{1}-\mu_{2})^t
+$$</li>
+<li>We can use this to get :
+$$
+{(\hat{\mu_{1}} - \hat{\mu_{2}})^{2}} = v^{t}S_{B}v
+$$</li>
+<li>Thus the objective function can be written as;
+$$
+J(v) = \frac{v^{t}S_{B}v}{v^{t}S_{w}v}
+$$</li>
+<li>So to minimize \(v\) we will take the derivative with respect to \(v\) and set equal to zero</li>
+<li>Doing that we can solve for \(v\) as:
+$$
+S_{B}v = \lambda S_{w}v
+$$</li>
+<li>If \(S_{w}\) is full rank (aka its has a inverse) we can convert this equation to :
+$$
+S_{w}^{-1}S_{B}v = \lambda v
+$$
+$$
+v = S_{w}^{-1}(\mu_{1}-\mu_{2})
+$$</li>
+</ul>
+
+</body>
+</html>

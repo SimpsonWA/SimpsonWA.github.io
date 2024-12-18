@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <p><strong>Continuation on the previous lecture essentially</strong></p>
+
+<h1>What about the Prior?</h1>
+
+<ul>
+<li>The maximum likelihood estimator for a Bernoulli distribution is computed as:
+$$
+\hat{\mu}_{MLE} = \frac{m}{N} = \frac{1}{N}\sum\limits_{i=1}^{N} x_{i} = \frac{\alpha_H}{\alpha_H+\alpha_T}
+$$</li>
+<li>Using Bayesian perspective we can say rather than estimating \(\mu\) we obtain the distribution over possible values of \(\mu\)</li>
+</ul>
+
+<h1>A Bayesian Perspective of Parameter Estimation</h1>
+
+<ul>
+<li>Use the bayesian rule:
+$$
+p(\mu|\mathcal{D}) = \frac{p(\mathcal{D}| \mu)p(\mu)}{p(\mathcal{D})}
+$$</li>
+<li>Which is equivalent to 
+$$
+p(\mu|\mathcal{D}) \propto p(\mathcal{D}|\mu) p(\mu)
+$$</li>
+<li><p><strong>Conjunction Priors</strong>: </p>
+
+<ul>
+<li>In Bayesian probability theory, if the posterior distribution \(p(\theta|x)\) are in the same family as the prior probability function \(p(\theta)\) the prior and posterior are then called conjunction distributions and the prior is called conjunction prior for the likelihood
+<h1>Beta Distribution</h1></li>
+</ul></li>
+<li><p>The beta distribution is defined as:
+$$
+Beta(\mu|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\mu^{a-1}(1-\mu)^{b-1}
+$$</p></li>
+<li>Where \(\Gamma(x)\) is a gamma function given by:
+$$
+\Gamma(x) = \int_{0}^{\infty} \mu^{x-1}e^{-\mu}d\mu
+$$</li>
+<li>\(\mathbb{E}(\mu) = \frac{a}{a+b}\)</li>
+<li>\(var[\mu] = \frac{ab}{(a+b)^{2}(a+b+1)}\)</li>
+</ul>
+
+<h1>Bayesian Learning for coin flipping</h1>
+
+<ul>
+<li>The posterior distribution of \(\mu\) is obtained by \(x\) the beta prior by the Bernoulli likelihood function and normalized:
+$$
+p(\mu|m,l,a,b) \propto \mu^{m+a-1}(1-\mu)^{l+b-1}
+$$</li>
+<li>Where;
+<ul>
+<li>\(l = N- m\) corresponding to the number of tails</li>
+</ul></li>
+<li>By normalizing the posterior distribution as:
+$$
+p(\mu|m,l,a,b) = \frac{\Gamma(\mu+a+l+b)}{\Gamma(l+b) \Gamma(l+b)}\mu^{m+a-1}(1-\mu)^{l+b-1} = Beta(\mu |m+a,l+b)
+$$</li>
+<li>the posterior predictive distribution for a new flip is:
+$$
+p(x=1|\mathcal{D}) = \int_{0}^{1} p(x=1|\mu)p(\mu|\mathcal{D}) = \frac{\mu + a}{\mu +a+l+b} = \hat{\mu}_{MAP}
+$$</li>
+<li>\(N_{0} = a+b\) : which is called the strength, or effective sample size of the prior  </li>
+</ul>
+
+<p>![[Pasted image 20241102100512.png]]</p>
+
+</body>
+</html>

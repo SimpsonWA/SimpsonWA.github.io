@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <ul>
+<li><strong>Discriminant Function Approach</strong>: Find a function \(f(x)\) which maps each input \(\vec{x}\) directly onto a class label</li>
+<li>Simplest representation of a linear discriminant function is obtained by taking the linear function of the input vector: 
+$$
+y(\vec{x}) = \vec{w}^{T}\vec{x} + w_{0}
+$$</li>
+<li>Then the classification rule is given by:
+<ul>
+<li>An input vector \(x\) is assigned to class \(C_{1}\) if \(y(\vec{x}) \geq 0\)</li>
+<li>An input vector \(x\) is assigned to class \(C_{2}\) if \(y(\vec{x}) &lt; 0\)</li>
+</ul></li>
+<li>Given a linear discriminant function based classification model:
+$$
+y(\vec{x}) = f(\vec{w}^{T}\vec{x}+w_{0})
+$$</li>
+<li><p>We can learn the parameters of the model by following 3 approaches:</p>
+
+<ul>
+<li>Least square</li>
+<li>Perceptron algorithm,</li>
+<li>fisher's linear discriminant
+<h2>Least Squares for classification</h2></li>
+</ul></li>
+<li><p>Each class \(C_{k}\) is described by its own linear model so that :
+$$
+y_{k}(\vec{x}) = \vec{w}_{k}^{T}\vec{x}+w_{k0}
+$$</p></li>
+<li>where \(k = 1,\dots,K\)</li>
+<li>We can group these together using vector notation so that:
+$$
+y(\vec{x}) = \hat{W}^{T}\hat{x}
+$$</li>
+<li>Where
+<ul>
+<li>\(\hat{W}\): is a matrix whose \(k\)-th column comprises the \(D+1\)-dimensional vector \(\hat{w}_{k}= (w_{k0},w_{k}^T)^{T}\)</li>
+<li>and \(\hat{x}\) is the corresponding augmented input vector \((1,x^{T})^{T}\) with a dummy input \(x_{0}= 1\) </li>
+</ul></li>
+</ul>
+
+</body>
+</html>

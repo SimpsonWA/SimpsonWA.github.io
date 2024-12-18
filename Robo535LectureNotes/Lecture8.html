@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h2>Generative Models:</h2>
+
+<ul>
+<li>Learning Class conditional probability (general model) \(P(x|c_{k})\)</li>
+<li>Uses Bayes' theorem to convert to \(P(c_{k}|x)\)</li>
+<li><p>Uses decision theory to minimize loss</p>
+
+<h2>Discriminative Model:</h2></li>
+<li><p>Learn posterior class probability \(P(c_{k}|x)\)</p></li>
+<li><p>Use decision theory to minimize loss</p>
+
+<h2>Discriminate Function:</h2></li>
+<li><p>Learn a discriminate function \(f(x)\) that calculates a class directly without the use of probabilities </p></li>
+</ul>
+
+<h2>Generative Models: Combining Models</h2>
+
+<ul>
+<li>For complex problems we want to break the problem into subproblems and solve each separate module:
+<ul>
+<li>For example if we had information available for blood tests as well as x-ray images</li>
+</ul></li>
+<li>Assume for each class separately the distribution of inputs for the x-ray images, \(x_i\), and blood data, \(x_b\), are independent:
+$$
+P(x_{i},x_{b}|c_{k}) = P(x_{i}|c_{k})P(x_{b}|c_{k})
+$$</li>
+<li><p>Then the posterior probability is given by:
+$$
+P(c_{k}|x_{i},x_{b}) \propto \frac{P(c_{k}|x_{i)}* P(c_{k}|x_{b})}{P(c_{k})}
+$$</p>
+
+<h2>Density Estimation:</h2></li>
+<li><p><strong>Density Estimation</strong>: is an estimate based on observed data of an unobservable underlying probability density function</p>
+
+<ul>
+<li>The unobservable density function is thought of as the density according to which a large population is distributed</li>
+<li>The data is thought of as a random sample of that population
+<h3>Density Estimation : Problem Formalization:</h3></li>
+</ul></li>
+<li><p><strong>Data</strong>: \(\mathcal{D} ={x_{1},...,x_{n}}\) where \(x_{i} \in \mathbb{R}^{d}\) is a vector attribute (aka features) values</p>
+
+<ul>
+<li>Modeled by random variables \(X = {X_{1},...,X_{D}}\)</li>
+</ul></li>
+<li><strong>Objective</strong>: estimate the underlying probability distribution over the variables \(X\), \(P(X) = P(X_{1},X_{2},...,X_{D})\) using examples in \(\mathcal{D}\) 
+![[Pasted image 20241102090620.png]]
+<h2>Types of Density Estimation:</h2></li>
+</ul>
+
+<h3>Parametric Density Estimation:</h3>
+
+<ul>
+<li>The distribution is modeled using a set of parameters \(\theta\):
+$$
+P(X| \theta)
+$$</li>
+<li>Example: Mean and covariance of a multivariable normal distribution</li>
+<li>Estimation: Find parameters \(\theta\) describing the observed data \(\mathcal{D}\)</li>
+</ul>
+
+<h3>Nonparametric Density Estimation:</h3>
+
+<ul>
+<li>The model of the distribution utilizes all examples in \(\mathcal{D}\)</li>
+<li>As if all examples were parameters of the distribution</li>
+<li>Examples: Kernel Density estimation, nearest neighbor density estimation</li>
+</ul>
+
+</body>
+</html>

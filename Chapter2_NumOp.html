@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>William Simpson - Robotics/Software Engineer</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+				<li><a href="about.html">About Me</a></li> 
+				<li><a href="projects.html">Projects</a></li> 
+				<li><a href="notes.html">Academic Notes</a></li> 
+                <li><a href="PersonalNotes.html">Indpendent Notes</a></li> 
+				<li><a href="LeetCode.html">Leetcode</a>
+            </ul>
+        </nav>
+    </header>
+    <h1>Unconstrained Optimization</h1>
+    <p>Minimize objective function with no restrictions on the value of variables formulated as:</p>
+    <div>
+    
+
+\[
+    \min_{x} f(x)
+    \]
+
+
+    </div>
+    <ul>
+        <li>\( x \in \mathbb{R}^n \): real vector with \( n \geq 1 \) components</li>
+        <li>\( f: \mathbb{R}^{n}\rightarrow \mathbb{R} \)</li>
+    </ul>
+
+    <h2>2.1 What is the solution</h2>
+    <p><strong>Global minimizer</strong> of \( f \):</p>
+    <ul>
+        <li>a point \( x^{*} \) is a global minimizer if \( f(x^{*}) \leq f(x) \) for all \( x \)</li>
+    </ul>
+    <p><strong>Local Minimizer (weak) of \( f \):</strong></p>
+    <ul>
+        <li>A point \( x^{*} \) is a local minimizer if there is a neighborhood \( \mathcal{N} \) of \( x^{*} \) such that \( f(x^{*}) \leq f(x) \) for all \( x \in \mathcal{N} \)</li>
+        <li>\( \mathcal{N} \) or neighborhood of \( x^{*} \) is just an open set that contains \( x^{*} \)</li>
+    </ul>
+    <p><strong>(Strict) Local Minimizer of \( f \):</strong></p>
+    <ul>
+        <li>A point \( x^{*} \) is a strict local minimizer if there is a neighborhood \( \mathcal{N} \) of \( x^{*} \) such that \( f(x^{*}) < f(x) \) for all \( x \in \mathcal{N} \) with \( x \neq x^{*} \)</li>
+    </ul>
+    <p><strong>(Isolated) Local Minimizer of \( f \):</strong></p>
+    <ul>
+        <li>A point \( x^{*} \) is an isolated local minimizer if there is a neighborhood \( \mathcal{N} \) of \( x^{*} \) such that \( x^{*} \) is the only local minimizer in \( \mathcal{N} \)</li>
+    </ul>
+
+    <h3>Recognizing a local minimum</h3>
+    <p>When \( f \) is smooth (\( f \) is twice differentiable) we can tell that \( x^{*} \) is a local minimizer (and possibly strict) by examining the gradient \( \nabla f(x^{*}) \) and the Hessian \( \nabla^{2}f(x^{*}) \)</p>
+
+    <h4>Theorem 2.1: <em>Taylor's Theorem</em></h4>
+    <p>Suppose that \( f: \mathbb{R}^{n}\rightarrow \mathbb{R} \) is continuously differentiable and that \( p \in \mathbb{R}^n \) then we would have:</p>
+    <div>
+    
+
+\[
+    f(x+p) = f(x) + \nabla f(x+tp)^{T}p 
+    \]
+
+
+    </div>
+    <p>for some \( t \in (0,1) \). Moreover if \( f \) is twice continuously differentiable we have that:</p>
+    <div>
+    
+
+\[
+    \nabla f(x+p) = \nabla f(x) \int_{0}^{1} \nabla^{2}f(x+tp)p \, dt
+    \]
+
+
+    </div>
+    <p>and that:</p>
+    <div>
+    
+
+\[
+    f(x+p) = f(x) + \nabla f(x)^{T}p + \frac{1}{2}p^{T}\nabla^{2}f(x+tp)p
+    \]
+
+
+    </div>
+    <p>for some \( t \in (0,1) \)</p>
+
+    <h4>Theorem 2.2: <em>First order necessary Conditions</em></h4>
+    <p>If \( x^{*} \) is a local minimizer and \( f \) is continuously differentiable in an open neighborhood of \( x^{*} \) then \( \nabla f(x^{*}) =0 \)</p>
+
+    <h4>Theorem 2.3: <em>Second Order Necessary Conditions</em></h4>
+    <p>If \( x^{*} \) is a local minimizer of \( f \) and \( \nabla^{2}f \) exists and is continuous in an open neighborhood of \( x^{*} \) then \( \nabla f(x^{*}) =0 \) and \( \nabla^{2}f(x^{*}) \) is positive semidefinite</p>
+
+    <h4>Theorem 2.4: <em>Second order sufficient conditions</em></h4>
+    <p>Suppose that \( \nabla^{2}f \) is continuous in an open neighborhood of \( x^{*} \) and that \( \nabla f(x^{*}) =0 \) and  \( \nabla^{2}f(x^{*}) \) is positive semidefinite. Then \( x^{*} \) is a strict local minimizer of \( f \)</p>
+
+    <h4>Theorem 2.5</h4>
+    <p>When \( f \) is convex any local minimizer \( x^{*} \) is a global minimizer of \( f \). Also if \( f \) is differentiable, then any stationary point \( x^{*} \) is a global minimizer of \( f \)</p>
+
+    <h2>2.2 Overview of Algorithms</h2>
+    <ul>
+        <li>Commonly user selects starting point \( x_{0} \)</li>
+        <li>Beginning at \( x_{0} \) the algorithm generates a sequence of iterations \( \{x_k\}_{k=0}^{\infty} \) that terminates either when no progress is made or sufficiently reached a solution</li>
+    </ul>
+
+    <h3>2 Strategies: Line search and Trust region</h3>
+    <p><strong>Line Search</strong>:</p>
+    <ul>
+        <li>Algorithm chooses a direction \( p_{k} \) and searches along this direction from the current iteration \( x_{k} \) for a new iteration with a lower value</li>
+        <li>Distance along \( p_{k} \) can be found by solving the following minimization problem to find a step length \( \alpha \):
+        
+\[
+        \min_{\alpha > 0 } f(x_{k}+ \alpha p_{k})
+        \]
+
+
+        </li>
+        <li>The line search algorithm generates a limited number of trial step lengths until it finds one that loosely approximates the equation above. At the new point, a new search direction and step length are committed and the process iterates.</li>
+    </ul>
+
+    <p><strong>Trust Region</strong>:</p>
+    <ul>
+        <li>Info about \( f \) is gathered to construct \( m_{k} \) (model function) whose behavior near \( x_{k} \) is similar to that of \( f \)</li>
+        <li>We restrict the search for \( m_k \) to some region near \( x_{k} \), in other words, candidate step \( p \) by approximating:
+        
+
+\[
+        \min_{p}m_{k}(x_{k}+p)
+        \]
+
+
+        </li>
+        <li>Where \( x_{k}+p \) lies inside the trust region</li>
+        <li>If the candidate solution does not provide a sufficient increase in \( f \), we can conclude the trust region is too large</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <ul>
+<li>Uncertainty is a native property of real world data
+<ul>
+<li>Uncertainty arises from noise on measurements</li>
+<li>It also arises through the finite size of data sets (incomplete observations)</li>
+</ul></li>
+<li>Probability theory is the foundation of ML</li>
+<li>Probability theory provides a consistent framework for the quantification and manipulation of uncertainty and forms one of the central foundations for pattern recognition and ML</li>
+<li>Combined with decision theory, it allows us to make optimal predictions</li>
+</ul>
+
+<h1>Definition of Probability</h1>
+
+<p><strong>Probability</strong>:
+- Probability or likely hood is a measure of how likely something will happen or is true
+- Probability values range from 0 (wont happen) to 1 (will happen)
+- Formal: Probability <code>p</code> is a positive real number describing the likelihood of an event satisfying:
+    - for any event: \(P(X = e) \in [0,1]\)
+    - For a mutually <strong>exclusive</strong> and <strong>exhaustive</strong> set of events (\(E\)), \(\sum_{X \in E} P(X) =1\)</p>
+
+<h1>Starting from a General Probability Problem</h1>
+
+<ul>
+<li><p>Consider a setting with 2 random variables</p>
+
+<ul>
+<li>\(X\): which takes values \({x_i}\) where \(i = 1,2,...,M\)</li>
+<li>\(Y\): which takes values \({y_i}\) where \(i = 1,2,...,L\)
+![[Pasted image 20241026131756.png]]</li>
+</ul></li>
+<li><p>In the illustration above \(M=5\), and \(L=3\)</p></li>
+<li>If we consider a total number \(N\) of instances of these variables, then we denote the number of instances where \(X = x_i\) and \(Y=y_j\) by \(n_ij\) ; which is the number of points in the corresponding cell of the array</li>
+<li>The number of points in column \(i\) corresponding to \(X=x_i\) is denoted \(c_i\)</li>
+<li>The number of points in row \(j\) corresponding to \(Y = y_j\) is denoted \(r_j\)</li>
+</ul>
+
+<h1>Joint Probability</h1>
+
+<ul>
+<li>The probability that \(X\) will take the value \(x_i\) and \(Y\) will take the value \(y_j\) is written as
+$$
+P(X = x_{i,}Y = y_j)
+$$</li>
+<li>This is called the joint probability of \(X=x_i\) and \(Y=y_j\)
+$$
+P(X = x_{i,}Y = y_{j)}= P(X=x_{i} \ \cap \ Y = y_{j )}= \frac{n_{ij}}{N}
+$$
+</body>
+</html>

@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Inverse Operators</h2>
+    <ul>
+        <li>A linear operator \( A: X \rightarrow Y \) between 2 vector spaces \( X \) and \( Y \) is said to be <strong>invertible</strong> if there exists an operator \( A^{-1}: Y \rightarrow X \) such that (1) and (2) are true:
+            <div>
+            
+
+\[
+            AA^{-1} = I \quad \text{i.e.} \quad AA^{-1}\vec{y} = \vec{y} \quad \text{for all } \vec{y} \in Y \quad (1)
+            \]
+
+
+            </div>
+            <div>
+            
+
+\[
+            A^{-1}A = I \quad \text{i.e.} \quad A^{-1}A \vec{x} = \vec{x} \quad \text{for all } \vec{x} \in X \quad (2)
+            \]
+
+
+            </div>
+        </li>
+        <li>\( A^{-1} \) is the inverse of \( A \)</li>
+        <li><strong>Lemma</strong>: If \( A \) is an invertible linear operator, \( A^{-1} \) is a linear operator</li>
+        <li><strong>Invertibility</strong> is a topic of interest where we want to identify the "input" of a system from the "output" of that system
+            <ul>
+                <li>EG: Given \( A \) and \( \vec{y} \), find \( \vec{x} \) such that \( A\vec{x} = \vec{y} \)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Inverse Operators: Matrix Case</h2>
+    <ul>
+        <li>Restricted to \( X = \mathbb{R}^n \) or \( \mathbb{C}^n \) and \( Y = \mathbb{R}^m \) or \( \mathbb{C}^m \)</li>
+        <li>An \( m \times n \) matrix \( A \) cannot be invertible; only \( n \times n \) square matrices of \( A \) are invertible
+            <ul>
+                <li>Though not all \( n \times n \) matrices are invertible</li>
+            </ul>
+        </li>
+        <li><strong>Nonsingular</strong> matrix: an invertible matrix</li>
+        <li>If \( A \) is a square (say, \( n \times n \)) matrix, then the following statements are all equivalent (note that some of these concepts will be defined later):
+            <ul>
+                <li>\( A \) is invertible</li>
+                <li>\( A \) is nonsingular</li>
+                <li>\( \det(A) \neq 0 \)</li>
+                <li>\( A\vec{x} = \vec{0} \) if \( \vec{x} = \vec{0} \)</li>
+                <li>The rows of \( A \) are linearly independent</li>
+                <li>The columns of \( A \) are linearly independent</li>
+                <li>\( \dim(\mathcal{N}(A)) = 0 \) which means \( \mathcal{N}(A) = \{\vec{0}\} \)</li>
+                <li>\( \dim(\mathcal{R}(A)) = n \)</li>
+                <li>\( \text{rank}(A) = n \)</li>
+                <li>\( A \) is full rank</li>
+                <li>All eigenvalues of \( A \) are non-zero</li>
+                <li>The matrix \( A^{H}A \) is positive definite</li>
+                <li>\( A^{H} \) is invertible</li>
+            </ul>
+        </li>
+        <li><strong>Schur Complement of A</strong>:
+            <div>
+            
+
+\[
+            S = A_{22} - A_{21}A^{-1}_{11}A_{12}
+            \]
+
+
+            </div>
+        </li>
+    </ul>
+
+    <h2>Adjoint Operators</h2>
+    <ul>
+        <li><strong>Adjoint Operator</strong>: Let \( A:X \rightarrow Y \) be a bounded linear operator between 2 inner product spaces \( X \) and \( Y \). The <em>Adjoint</em> of \( A \), denoted \( A^{*}: Y \rightarrow X \), is the unique operator such that:
+            <div>
+            
+
+\[ < A\vec{x},\vec{y}>_Y = <\vec{x},A^{*}\vec{y}>_X \quad \text{for all } \vec{x} \in X \text{ and } \vec{y} \in Y
+            \]
+
+
+            </div>
+        </li>
+        <li><strong>Self-Adjoint</strong>: The operator \( A:X \rightarrow X \) is said to be self-Adjoint if \( A = A^{*} \)</li>
+        <li><strong>Lemma</strong>: If \( A \) is a bounded linear operator with Adjoint \( A^{*} \), then \( A^{*} \) is itself a bounded linear operator and:
+            <div>
+            
+
+\[
+            ||A^{*}|| = ||A||
+            \]
+
+
+            </div>
+        </li>
+        <li><strong>Lemma</strong>: If \( A \) is a bounded linear operator with Adjoint \( A^{*} \), then \( (A^{*})^{*} = A \)</li>
+        <li><strong>Lemma</strong>: If \( A \) is an invertible linear operator with Adjoint and bounded inverse \( A^{-1} \), then:
+            <div>
+            
+
+\[
+            (A^{-1})^{*} = (A^{*})^{-1}
+            \]
+
+
+            </div>
+        </li>
+        <li><strong>Theorem</strong>: Let \( A:X \rightarrow Y \) be a bounded linear operator between 2 inner product spaces \( X \) and \( Y \). Then for a fixed \( \vec{y} \in Y \), the vector \( \vec{x} \in X \) is a minimizer \( ||\vec{y} - A\vec{x}||_Y \) if:
+            <div>
+            
+
+\[
+            A^{*}A\vec{x} = A^{*}\vec{y}
+            \]
+
+
+            </div>
+            <ul>
+                <li>If \( A^{*}A \) is invertible, then the unique minimizer is given by:
+                    <div>
+                    
+
+\[
+                    \vec{x} = (A^{*}A)^{-1}A^{*}\vec{y}
+                    \]
+
+
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+        <h2>Adjoint Operators: Matrix Case</h2>
+        <ul>
+            <li>In the case of \( X = \mathbb{R}^n \) and \( Y = \mathbb{R}^m \), recall \( A:X \rightarrow Y \) can be represented as multiplication by an \( m \times n \) matrix.</li>
+        </ul>
+    
+        <h3>What is the Adjoint of a matrix?</h3>
+        <ul>
+            <li>Using the standard inner product of \( X \) and \( Y \), the Adjoint of \( A \) is the unique operator such that:
+                <div>
+                
+    
+    \[
+                \vec{y}^{H}A\vec{x} = < A \vec{x},\vec{y}> = <\vec{x},A^{*}\vec{y}> = \vec{y}^{H}(A^{*})^{H}\vec{x}
+                \]
+    
+    
+                </div>
+                <ul>
+                    <li>for all \( \vec{x} \) and \( \vec{y} \).</li>
+                </ul>
+            </li>
+            <li><strong>Self-adjoining matrix operators</strong>:
+                <ul>
+                    <li>\( A = A^{H} \)</li>
+                    <li>Symmetric if real</li>
+                    <li>Conjugate symmetry if complex</li>
+                    <li>Hermitian if complex</li>
+                </ul>
+            </li>
+            <li><strong>Theorem</strong>: Let \( A \) be a real-valued \( m \times n \) matrix. For a fixed \( \vec{y} \in \mathbb{R}^m \), the vector \( \vec{x} \in \mathbb{R}^n \) is a minimizer of \( ||\vec{y} - A\vec{x}||_2 \) if:
+                <div>
+                
+    
+    \[
+                A^{H}A\vec{x} = A^{H}\vec{y}
+                \]
+    
+    
+                </div>
+                <ul>
+                    <li>If \( A^{H}A \) is invertible, then the unique minimizer of \( ||\vec{y} - A\vec{x}||_2 \) is given by:
+                        <div>
+                        
+    
+    \[
+                        \vec{x} = (A^{H}A)^{-1}A^{H}\vec{y}
+                        \]
+    
+    
+                        </div>
+                    </li>
+                    <li>where \( (A^{H}A)^{-1}A^{H} \) is the pseudoinverse.</li>
+                </ul>
+            </li>
+        </ul>
+</body>
+</html>
+
+
+
+

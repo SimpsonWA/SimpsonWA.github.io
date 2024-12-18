@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>The Orthogonality Principle (Formulation)</h2>
+    <ul>
+        <li>Let \( S \) be an inner product space and let \( T \) be a subspace of \( S \)
+            <ul>
+                <li>Our goal is to answer: Given some \( \vec{x} \in S \), what is the closest point to \( \vec{x} \) in \( T \)?</li>
+                <li>Another way to put it: We want to find \( \vec{x'} \in T \) that minimizes \( ||\vec{x} - \vec{x'}|| \) using the norm induced by the inner product on \( S \)</li>
+            </ul>
+        </li>
+        <li>The <strong>Projection Theorem</strong> tells us something about the minimizer \( \vec{x'} \), namely:
+            <ul>
+                <li><strong>The error between the minimizer and \( \vec{x} \) is orthogonal to \( T \)</strong></li>
+            </ul>
+        </li>
+        <li><strong>Theorem (Projection Theorem)</strong>:
+            <ul>
+                <li>Suppose \( S \) is an inner product space and suppose \( T \) is a linear subspace of \( S \)</li>
+                <li>For a given vector \( \vec{x} \in S \), there is a unique vector \( \vec{x'} \in T \) such that:
+                    <div>
+                    
+
+\[
+                    ||\vec{x} - \vec{x'}|| \leq ||\vec{x} - \vec{z}|| \quad \text{for all } \vec{z} \in T
+                    \]
+
+
+                    </div>
+                </li>
+                <li>Furthermore, a vector \( \vec{x'} \in T \) is the minimizer (the closest vector in \( T \) to \( \vec{x} \)) if:
+                    <div>
+                    
+
+\[
+                    \vec{x} - \vec{x'} \perp T
+                    \]
+
+
+                    </div>
+                    <ul>
+                        <li>i.e: \( <\vec{x} - \vec{x'},\vec{y}> = 0 \) for all \( \vec{y} \in T \)</li>
+                    </ul>
+                </li>
+                <li>The minimizing vector \( \vec{x'} \) is the <strong>orthogonal projection</strong> of \( \vec{x} \) onto \( T \)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Approximation in a Subspace (General Case)</h2>
+    <ul>
+        <li>Problem:
+            <ul>
+                <li>Let \( \vec{v_1},\vec{v_2},....,\vec{v_n} \) be a finite collection of vectors in an inner product space \( S \) and suppose \( T = \text{span}\{\vec{v_1},\vec{v_2},...,\vec{v_n}\} \). Given an arbitrary vector \( \vec{x} \in S \), how can we compare its best approximation \( \vec{x'} \) in \( T \)?</li>
+            </ul>
+        </li>
+        <li>The goal is to obtain the scalar coefficients \( a_1, a_2,...., a_n \in R \) such that:
+            <div>
+            
+
+\[
+            \vec{x'} = \sum_{k=1}^{n} a_k \vec{v_k}
+            \]
+
+
+            </div>
+            <ul>
+                <li>Minimizes \( ||\vec{x} - \vec{x'}|| \)</li>
+            </ul>
+        </li>
+        <li>We know from the projection theorem that \( \vec{x} - \vec{x'} \perp \text{span}\{\vec{v_1},\vec{v_2},...,\vec{v_n}\} \), therefore:
+            <div>
+            
+
+\[
+            <\vec{x}-\vec{x'},\vec{v_l}> = 0 \quad \text{for all } l=1,2,...,n
+            \]
+
+
+            </div>
+        </li>
+        <li>This means we require:
+            <div>
+            
+
+\[
+            <\vec{x} - \sum_{k=1}^{n} a_k \vec{v_k}, \vec{v_l}> = 0 \quad \text{for all } l=1,2,...,n
+            \]
+
+
+            </div>
+        </li>
+        <li>Since \( <\vec{x}-\vec{x'},\vec{v_l}> = 0 \), then \( <\vec{x},\vec{v_l}> = <\vec{x'},\vec{v_l}> \) or
+            <div>
+            
+
+\[
+            <\vec{x}',\vec{v_l}> = <\vec{x},\vec{v_l}> = \sum_{k=1}^{n} a_k <\vec{v_k},\vec{v_l}>
+            \]
+
+
+            </div>
+        </li>
+        <li>We can set this up as a matrix defined as:
+            <div>
+            
+
+\[
+            \begin{bmatrix}
+            <\vec{v_1},\vec{v_1}> & <\vec{v_2},\vec{v_1}> & \ldots & <\vec{v_m},\vec{v_1}> \\
+            <\vec{v_1},\vec{v_2}> & <\vec{v_2},\vec{v_2}> & \ldots & <\vec{v_m},\vec{v_2}> \\
+            \vdots & \vdots & \ddots & \vdots \\
+            <\vec{v_1},\vec{v_m}> & <\vec{v_2},\vec{v_m}> & \ldots & <\vec{v_m},\vec{v_m}>
+            \end{bmatrix}
+            \begin{bmatrix}
+            a_1 \\
+            a_2 \\
+            \vdots \\
+            a_m
+            \end{bmatrix} =
+            \begin{bmatrix}
+            <\vec{x},\vec{v_1}> \\
+            <\vec{x},\vec{v_2}> \\
+            \vdots \\
+            <\vec{x},\vec{v_m}>
+            \end{bmatrix}
+            \]
+
+
+            \]
+
+
+            </div>
+            <div>
+            
+
+\[
+            G \vec{a} = \vec{b}
+            \]
+
+
+            </div>
+            <ul>
+                <li>Where \( G \) is called the <strong>Grammian</strong> or <strong>Gram</strong> matrix</li>
+                <li>Note: \( G = G^H \)</li>
+                <li>If \( G \) is invertible (if \( \vec{v_1},\vec{v_2},...,\vec{v_n} \) are linearly independent):
+                    <div>
+                    
+
+\[
+                    \vec{a} = G^{-1} \vec{b}
+                    \]
+
+
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h2>Linear Regression</h2>
+
+<ul>
+<li>Function \(f: X \rightarrow Y\) which is a linear combination of input components:
+$$
+f(x) = w_{0}+w_{1}x_{1}+...+  w_{d}x_{d}= w_{0}\sum\limits_{j=1}^{d} w_{j}x_{j}
+$$</li>
+<li>\(w_{0}\): <strong>Bias</strong></li>
+<li>\({w_0,w_1,...,w_d}\): <strong>Weights</strong></li>
+<li>This can be described in vector form as:
+<ul>
+<li><strong>input Vector</strong>: \(x = {x_{0},x_{1},...,x_{d}}\)</li>
+<li><strong>Function</strong>: \(w^{T}x\) </li>
+</ul></li>
+</ul>
+
+<h2>Mean Squared Error</h2>
+
+<ul>
+<li>Error function: Measures how much our predictions deviate from our desired outputs</li>
+<li><strong>Mean Square Error (MSE)</strong>
+$$
+J_{n} = \frac{1}{n}\sum\limits_{i=1}^{n} (y_{i}- f(x_{i}))^{2}
+$$</li>
+<li><p>For learning we want to minimize this error function by finding the correct weights that reduce the equation towards 0</p>
+
+<h2>Optimization of Linear Regression:</h2></li>
+<li><p>We want weights that minimize the error (in this case <strong>MSE</strong>) given our modeled function</p></li>
+<li>To do this we take the derivatives with respect to the parameters (weights) and set them equal to 0:
+$$
+\frac{\partial}{\partial w_{j}} J_{n}(w) = \frac{-2}{n} \sum\limits_{i=1}^{n} (y_{i}- w_{0}x_{i,0}-...-w_{d}x_{i,d})x_{i,d} = 0
+$$</li>
+<li>This can be written as a vector of derivatives:
+$$
+grad_{w} (J_{n}(w))= \nabla_{w}(J_{n}(w)) = \frac{-2}{n} \sum\limits_{i=1}^{n}  (y_{i}-w^{T}x_{i})x_{i}=\vec{0}
+$$</li>
+<li>So \(grad_{w}(J_{n}(w)) = \vec{0}\) can be defined as a set of equations with respect to w written as:
+$$
+Aw= b
+$$</li>
+<li>So to solve for the weights we can take the inverse of A:
+$$
+w = A^{-1}b
+$$</li>
+<li>If \(A\) is not invertible we can do the pseudo inverse of A instead:
+$$
+w = (A^{T}A)^{-1}A^{T}b
+$$</li>
+</ul>
+
+</body>
+</html>

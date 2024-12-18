@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h2>Gradient Descent Solution:</h2>
+
+<ul>
+<li><strong>Objective</strong>: Optimize weights in a linear regression model.</li>
+<li><strong>Concept</strong>:
+<ul>
+<li>Adjust weights to minimize the error in predictions.</li>
+<li>Use the gradient of the error function to determine the direction of adjustment.</li>
+</ul></li>
+<li><strong>Error Function</strong>: Given an error function for \(n\) samples:
+$$
+J_{n}= Error(\vec{w}) = \frac{1}{n} \sum\limits_{i=1}^{n} (y_{i}-f(x_{i},w))^{2}
+$$</li>
+<li><strong>Gradient Descent Update</strong>: Model the gradient descent step as:
+$$
+\nabla_{w}(J_{n}(w)) = \frac{-2}{n} \sum\limits_{i=1}^{n} (y_{i}- w^{T}x_{i}) x_{i}
+$$</li>
+<li><p>The weight update rule is then:
+$$
+w_{j}\leftarrow w_{j}* -\alpha \frac{\partial}{\partial w_{j}} Error(w)|_{w^*}
+$$</p>
+
+<h2>Online Gradient Descent:</h2></li>
+<li><p><strong>Error Function</strong>: Same error function as before:
+$$
+J_{n}= Error(\vec{w}) = \frac{1}{n} \sum\limits_{i=1}^{n} (y_{i}-f(x_{i},w))^{2}
+$$</p></li>
+<li><strong>Sample Error</strong>: For a single data point \(D_{i} = \langle x_{i}, y_{i} \rangle\), the error can be modeled as:
+$$
+J_{online}= Error_{i}(\vec{w}) = \frac{1}{2}(y_{i}-f(x_{i},w))^{2}
+$$</li>
+<li><strong>Weight Update</strong>: Update for the \(j-th\) weight
+$$
+w_{j} \leftarrow w_{j}- \alpha(i) \frac{\partial Error_{i}(w)}{\partial w_{j}}|w
+$$</li>
+<li>In vector form, this becomes::
+<!--SR:!2024-11-16,2,246-->
+$$
+w_{j} \leftarrow w_{j}- \alpha(i)(y_{i}- f(x_{i}, w))x_{i,j}
+$$</li>
+</ul>
+
+<pre><code>
+    Algorithm: Online-Linear-Regression
+    -----------------------------------
+    Procedure Online-Linear-Regression(D, number of iterations)
+        Initialize weights w = (w_0, w_1, ..., w_d)
+        For i = 1 to number of iterations do
+            Select a data point D = (x_i, y_i)
+            Set learning rate α(i)
+            Update weight vector w = w + α(i) * (y_i - f(x_i, w)) * x_i
+        End For
+        Return weights w
+    End Procedure
+    </code></pre>
+    
+
+</body>
+</html>

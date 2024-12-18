@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Gram-Schmidt Algorithm</h2>
+    <ul>
+        <li>One way to obtain an orthogonal basis</li>
+        <li>Problem we want to solve:
+            <ul>
+                <li>Suppose we have a set of vectors \( \vec{v_1},\vec{v_2},...,\vec{v_n} \) in an inner product space \( S \). Assume the vectors are linearly independent.</li>
+            </ul>
+        </li>
+        <li>The goal is to construct a set of vectors \( \vec{q_1},\vec{q_2},....,\vec{q_n} \) such that:
+            <div>
+            
+
+\[
+            1. \quad \text{span}\{\vec{q_1},\vec{q_2},....,\vec{q_n}\} = \text{span}\{\vec{v_1},\vec{v_2},....,\vec{v_n}\}
+            \]
+
+
+            </div>
+            <div>
+            
+
+\[
+            2.  \quad <\vec{q_k},\vec{q_l}> = \begin{cases}
+                                                1, & k=l \\
+                                                0, & k \neq l
+                                                \end{cases}
+            \]
+
+
+            </div>
+        </li>
+        <li>So, 2 is saying that the vectors \( \vec{q_1},\vec{q_2},....,\vec{q_n} \) are orthonormal</li>
+        <li>In other words, we want \( \vec{q_1},\vec{q_2},....,\vec{q_n} \) to form an orthonormal basis (Orthobasis) for the n-dimensional subset spanned by \( \vec{v_1},\vec{v_2},...,\vec{v_n} \)</li>
+    </ul>
+
+    <h3>Formulation</h3>
+    <ol>
+        <li>We find a unit normal vector \( \vec{q_1} \) such that \( \text{span}\{\vec{q_1}\} = \text{span}\{\vec{v_1}\} \)</li>
+        <li>We find a unit-norm vector \( \vec{q_2} \) orthonormal to \( \vec{q_1} \) such that \( \text{span}\{\vec{q_1},\vec{q_2}\}  = \text{span}\{\vec{v_1},\vec{v_2}\} \)</li>
+        <li>We find a unit-norm vector \( \vec{q_3} \) orthonormal to \( \vec{q_1} \) and \( \vec{q_2} \) such that \( \text{span}\{\vec{q_1},\vec{q_2},\vec{q_3}\}  = \text{span}\{\vec{v_1},\vec{v_2},\vec{v_3}\} \)</li>
+        <li>So on and so forth</li>
+    </ol>
+
+    <div>
+    
+
+\[
+    \vec{e_k} = \vec{v_k} - \sum_{l=1}^{k-1} <\vec{v_k},\vec{q_l}>\vec{q_l}
+    \]
+
+
+    </div>
+    <ul>
+        <li>To get \( \vec{q_k} \), normalize \( \vec{e_k} \):
+            <div>
+            
+
+\[
+            \vec{q_k} = \frac{\vec{e_k}}{||\vec{e_k}||}
+            \]
+
+
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

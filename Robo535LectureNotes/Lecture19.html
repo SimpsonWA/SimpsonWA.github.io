@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h1>The Perceptron Algorithm</h1>
+
+<ul>
+<li>Perceptron is a 2 class model (binary classification) defined as:
+$$
+y(\vec{x}) = f(\vec{w}^{T}\phi(\vec{x}))
+$$</li>
+<li>\(\phi(\vec{x})\): transform function to form basis function
+$$
+f(a) = \begin{cases} +1, \quad a \geq 0 \
+-1, \quad a&lt;0 \end{cases}
+$$</li>
+</ul>
+
+<h2>Error function</h2>
+
+<ul>
+<li>perceptron uses misclassification as error function</li>
+<li>So we are seeking a projection (weight) vector \(\vec{w}\) such that
+<ul>
+<li>data point \(x_{n}\) in class \(C_{1}\) will have \(\vec{w}^{T}\phi(x_{n})&gt;0\)</li>
+<li>data point \(x_{n}\) in class \(C_{2}\) will have \(\vec{w}^{T}\phi(x_{n})&lt;0\)</li>
+</ul></li>
+<li>Using data labels \(t = {+1,-1}\) we can write the above criteria as \(\vec{w}^{T}(x_{n})t_{n}&gt;0\), so the objective is to minimize the overall misclassifications:
+$$
+E_{p}(\vec{w}) = -\sum\limits_{x_{n}\in M} \vec{w}^{T}\phi_{n}t_{n}\quad \nabla E_p(\vec{w}) = -\sum\limits_{x_{n}\in M} \phi_{n}t_{n}
+$$</li>
+<li>\(\phi_{n}= \phi(x_{n})\)</li>
+<li>\(M\): denotes all misclassification patterns</li>
+</ul>
+
+<h2>Algorithm</h2>
+
+<ul>
+<li>We can apply stochastic gradient descent algorithm as follows:
+$$
+\vec{w}^{\tau + 1} = \vec{w}^{\tau}-\eta \nabla E_p(\vec{w}) = \vec{w}^{\tau}+\eta \phi_{n}t_{n}
+$$</li>
+<li>\(\eta\) : learning rate</li>
+<li>\(\tau\) : indicates the iteration index</li>
+<li>So we cycle through the training patterns in turn and for each pattern (datum) \(x_{n}\) we evaluate the perceptron function:
+<ul>
+<li>If the pattern is correctly classified, then the weight vector remains unchanged</li>
+<li>If incorrect:
+<ul>
+<li>For class \(C_{1}\) we add vector \(\phi(x_{n})\) onto current estimate of weight vector \(\vec{w}\)</li>
+<li>For class \(C_{2}\) we subtract vector \(\phi(x_{n})\) onto current estimate of weight vector \(\vec{w}\)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h2>Discrete time LTI Systems:</h2>
+
+<ul>
+<li><strong>LTI</strong>: Linear and time invariant</li>
+<li>We can write \(x[n]\) as a sum of scaled and shifted impulses:
+$$
+x[n] = \sum_{k=-\infty}^{\infty} x[k]\delta[n-k] \quad (1)
+$$</li>
+<li>And we can write \(y[n]\) as a sum of scaled and shifted impulse responses:
+$$
+y[n] = \sum_{k=-\infty}^{\infty} x[k]h[n-k] \quad (2)
+$$</li>
+<li><p>This is known as the convolution formula</p></li>
+<li><p>For every LTI system, there are certain input signals for which the resulting output signal is merely a scaled version of the input signal:
+$$
+y[n] = \alpha x[n] \quad (3)
+$$</p></li>
+<li><p>\((3)\) For some \(\alpha \in \mathbb{C}\). These input signals are called eigenfunctions (or <strong>eigenvectors</strong>) of the system</p></li>
+<li><p><strong>Theorem (Eigenfunctions of an LTI system)</strong> : For any LTI system, every complex exponential signal of form \(x[n] = e^{jw_{0}n}\) (for every \(w_{0} \in \mathbb{R}\)) is an eigenfunction of the system</p></li>
+<li><p>Using discrete time Fourier Transform (<strong>DTFT</strong>) we can write \(x[n]\) as a linear combination of complex exponentials:
+$$
+x[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{jw})e^{jwn}\ dw \quad (4)
+$$</p></li>
+<li>\((4)\): Where DTFT coefficients are given by:
+$$
+X(e^{jw}) = \sum_{n=-\infty}^{\infty} x[n] e^{-jwn}
+$$</li>
+<li>Suppose \(x[n]\) and \(h[n]\) are linear combinations of complex exponentials
+$$
+\begin{align}
+x[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{jw})e^{jwn}\ dw \quad (4) \
+h[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} H(e^{jw})e^{jwn}\ dw  \quad (5)
+\end{align}
+$$</li>
+<li>We can write \(y[n]\) as a linear combination of these (\(4,5\)) responses:
+$$
+y[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{jw})H(e^{jw})e^{jwn}\ dw \quad (6)
+$$</li>
+<li>We can think of an LTI system as a multiplier in the Frequency domain
+$$
+y[n] = IDTFT{DTFT{x[n]} * DTFT{h[n]}}
+$$</li>
+<li>Where \(IDTFT\): Inverse discrete time Fourier transform </li>
+</ul>
+
+<h2>Finding eigenvalues and eigenvectors of a matrix</h2>
+
+<h3>Finding Eigenvalues</h3>
+
+<ul>
+<li>Suppose \(A\) is an \((n \times n)\) matrix</li>
+<li>We want to know: for what values of \(\lambda \in \mathbb{C}\) does there exist a non-zero \(\vec{x} \in \mathbb{C}^n\) such that:
+$$
+A\vec{x} = \lambda \vec{x} \quad (7)
+$$</li>
+<li>We know that for such a \((\lambda, \vec{x})\) pair to exist we must have:
+$$
+(A-\lambda I )\vec{x} = \vec{0} \quad (8)
+$$</li>
+<li><p>\((8)\): and there for \(\vec{x} \in \cal{N}(A-\lambda I)\)</p></li>
+<li><p>For such a non-zero \(\vec{x}\) to exist in the nullspace of \(A - \lambda I\) we need :
+$$
+dim(\cal{N}(A-\lambda I)) &gt; 0
+$$</p></li>
+<li>We can find all \(\lambda\) such that \(det(A - \lambda I) = 0\) to get the <strong>Eigenvalues</strong> of \(A\):
+$$
+det(A - \lambda I) = 0
+$$</li>
+</ul>
+
+<h3>Finding Eigenvectors</h3>
+
+<ul>
+<li>Suppose \(\lambda\) is an eigenvalue of \(A\), which has size of \((n \times n)\) </li>
+<li>Then for every \(\vec{x} \in \cal{N}(A-\lambda I)\) is considered an eigenvector of \(A\). Corresponding to the eigenvalue \(\lambda\)</li>
+<li>Because \(\cal{N}(A - \lambda I)\) is a linear subspace of \(\mathbb{C}^n\) we conventionally just specify enough vectors to span in this subspace.</li>
+<li>So we can say \((A-\lambda I)\vec{v} = \vec{0}\) and the \(v\) values that correspond will be the eigenvectors</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h2>Best Approximation to a Vector</h2>
+    <ul>
+        <li>For an orthonormal collection of vectors \( \vec{v_1}, \vec{v_2}, \ldots, \vec{v_n} \) in an inner product space \( S \) and an arbitrary vector \( \vec{x} \in S \), the best approximation \( \vec{x'} \) to \( \vec{x} \) among all vectors in \( T = \text{span}\{\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}\} \) is given by:
+            <div>
+            
+
+\[
+            \vec{x'} = \sum_{k=1}^{n} <\vec{x}, \vec{v_k}> \vec{v_k}
+            \]
+
+
+            </div>
+        </li>
+        <li>For an <strong>expansion</strong>, we want to consider a case where \( \vec{v_1}, \vec{v_2}, \ldots, \vec{v_n} \) form an orthonormal basis for the <em>entire</em> space \( S \):
+            <ul>
+                <li>In this case, \( \vec{x'} = \vec{x} \) so:
+                    <div>
+                    
+
+\[
+                    \vec{x} = \sum_{k=1}^{n} <\vec{x}, \vec{v_k}> \vec{v_k}
+                    \]
+
+
+                    </div>
+                </li>
+                <li>Notice that \( \vec{x} \) is on both sides of this equation, so it is known as a <strong>Reproducing Vector</strong></li>
+            </ul>
+        </li>
+        <li>If \( S \) is infinite-dimensional and we have an infinite sequence of orthonormal vectors \( \vec{v_1}, \vec{v_2}, \ldots, \vec{v_n} \) that form a basis of \( S \) as long as 
+            <div>
+            
+
+\[
+            \sum_{k=1}^{\infty} |<\vec{x}, \vec{v_k}>|^2 < \infty
+            \]
+
+
+            </div>
+            we can also write
+            <div>
+            
+
+\[
+            \vec{x} = \sum_{k=1}^{\infty} <\vec{x}, \vec{v_k}> \vec{v_k}
+            \]
+
+
+            </div>
+            <ul>
+                <li>Where the <strong>transform coefficients</strong> are \( <\vec{x}, \vec{v_1}>, <\vec{x}, \vec{v_2}>, \ldots \)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Perseval's Theorem</h2>
+    <h3>Setup</h3>
+    <ul>
+        <li>\( S \) is a finite-dimensional inner product space; we denote the inner product of \( S \) by \( <*,*>_s \)</li>
+        <li>Suppose \( \vec{v_1}, \vec{v_2}, \ldots, \vec{v_n} \) form an orthonormal basis for \( S \)</li>
+        <li>Suppose that \( \vec{x} \) and \( \vec{y} \) are two arbitrary vectors in \( S \) and denote their transform coefficients as
+            <div>
+            
+
+\[
+            \alpha_k = <\vec{x}, \vec{v_k}>_s \quad \text{and} \quad \beta_k = <\vec{y}, \vec{v_k}>_s \quad \text{for } k = 1,2, \ldots, n
+            \]
+
+
+            </div>
+        </li>
+        <li>Let \( \vec{\alpha} \) and \( \vec{\beta} \) denote vectors by:
+            <div>
+            
+
+\[
+            \vec{\alpha} = \begin{bmatrix}
+            \alpha_1 \\
+            \alpha_2 \\
+            \vdots \\
+            \alpha_n
+            \end{bmatrix} \quad \text{and} \quad
+            \vec{\beta} = \begin{bmatrix}
+            \beta_1 \\
+            \beta_2 \\
+            \vdots \\
+            \beta_n
+            \end{bmatrix}
+            \]
+
+
+            </div>
+        </li>
+    </ul>
+
+    <h3>Perseval's Theorem</h3>
+    <div>
+    
+
+\[
+    <\vec{x}, \vec{y}>_s = \sum_{k=1}^{n} \alpha_k \beta_k^{*} = <\vec{\alpha}, \vec{\beta}>_{l2}
+    \]
+
+
+    </div>
+    <h3>Properties</h3>
+    <ul>
+        <li>By taking \( \vec{x} = \vec{y} \) thus \( \vec{\beta} = \vec{\alpha} \) we obtain:
+            <div>
+            
+
+\[
+            ||\vec{x}||_s^2 = ||\vec{\alpha}||_{l2}^2
+            \]
+
+
+            </div>
+        </li>
+        <li>The vectors \( \vec{x} \) and \( \vec{y} \) are orthogonal in \( S \) if \( \vec{\alpha} \) and \( \vec{\beta} \) are orthogonal in \( l_2 \)</li>
+    </ul>
+
+    <h2>Truncating and Quantizing Orthobasis Expansions</h2>
+    <ul>
+        <li><strong>Truncating</strong>: One common type of manipulation involves transforming a signal to some domain, setting some coefficients to zero, and inverting the transform.</li>
+        <li><strong>Quantizing</strong>: Another common type of manipulation involves transforming a signal to some domain and then quantizing the transform coefficients so they can be encoded in binary.</li>
+    </ul>
+</body>
+</html>

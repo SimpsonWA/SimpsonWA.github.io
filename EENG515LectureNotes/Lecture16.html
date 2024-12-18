@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h2>Least - Square Problems:</h2>
+
+<ul>
+<li>In cases where no solution exists to the equation \(A\vec{x} = \vec{y}\) we may want to find the best approximation solution \(\vec{x}' \in X=\mathbb{R}^n\) or \(\mathbb{C}^n\)</li>
+<li>In general there maybe more than one vector \(\vec{x}'\) that solves the normal equations and that minimizes \(||\vec{y}-A\vec{x}||_2\)</li>
+<li><p>However they all give the same approximation in the \(Y\): We know that there is a unique vector \(\vec{y}' \in colspan(A)\) such that \((y-y')\perp colspan(A)\) using the standard inner product and this vector \(\vec{y}'\) is the unique minimizer of:</p>
+
+<ul>
+<li>\(min_{\vec{y'} \in colspan(A)} \quad ||\vec{y}-\vec{y'}||_2\) 
+![[Pasted image 20240911170629.png]]</li>
+</ul></li>
+<li><p>If the columns of A are linearly independent, then \(A^H A\) will be invertible, and the solution to the normal equations will be</p>
+
+<ul>
+<li>\(\vec{x}' = (A^H A)^{-1}A^H\vec{y} =  A^+\vec{y}\)</li>
+</ul></li>
+<li>If the columns of A are linearly dependent then \(A^H A\) will not be invertible and the solution having the smallest \(l_2\) norm will be given by:
+<ul>
+<li>\(\vec{x}' = A^{+}\vec{y}\)</li>
+<li>Although: \(A^{+} \neq (A^H A)^{-1}A^H\)</li>
+</ul></li>
+<li>We will have \(\vec{y}' = A\vec{x}' = AA^{+}\vec{y}\) which is the orthogonal projection of \(\vec{y}\) onto the column span of \(A\)</li>
+</ul>
+
+<h2>Least Square Problems: Weighted Least Squares</h2>
+
+<ul>
+<li>Suppose we use a weighted inner product on the space \(Y = \mathbb{R}^m\). Specifically consider
+<ul>
+<li>\(&lt;\vec{v},\vec{z}&gt;_W := \vec{z}^H W \vec{v} = \sum_{m}^{i=1} w_i v_i z^{*}_i\)</li>
+<li>\(W = diag(w_1,w_2,....,w_m)\)</li>
+</ul></li>
+<li>and each \(w_i &gt; 0\) using this inner product the induced norm becomes:
+<ul>
+<li>\(||\vec{z}||^2_W = &lt;\vec{z},\vec{z}&gt;_W = \vec{z}^H W \vec{z} = \sum_{m}^{i=1} w_i |z_i|^2\)</li>
+</ul></li>
+<li>Now consider the corresponding weighted least square problem. Given \(\vec{y} \in Y\) how can we find \(\vec{x}' \in X\) such that:
+<ul>
+<li>\(||\vec{y}-A\vec{x}'||_W\)</li>
+<li>Is as small as possible?</li>
+</ul></li>
+<li>We can solve this as any minimizer \(\vec{x}'\) must satisfy the normal equations:
+$$
+\begin{bmatrix}
+< a_1,a_1>_W \ < a_2,a_1>_W \ .... \ < a_n,a_1>_W \\
+< a_1,a_2>_W \ < a_2,a_2>_W \ .... \ < a_n,a_2>_W \\
+..... \ ...... \ .... \ ....... \\
+< a_1,a_m>_W \ < a_2,a_m>_W \ .... \ < a_n,a_m>_W \
+\end{bmatrix}
+\begin{bmatrix}
+x'_1\
+x'_2\
+...\
+x'_n
+\end{bmatrix} = 
+\begin{bmatrix}
+&lt;\vec{y},\vec{a_1}&gt;_W \
+&lt;\vec{y},\vec{a_2}&gt;_W \
+...\
+&lt;\vec{y},\vec{a_n}&gt;_W \
+\end{bmatrix}
+$$</li>
+<li>or equivalently
+<ul>
+<li>\(A^H W A \vec{x}' = A^H W \vec{y}\)</li>
+</ul></li>
+<li>if the columns of \(A\) are linearly indpendent the \(A^H W A\) will be invertible and the unique solution of the normal equation will be
+<ul>
+<li>\(\vec{x}' = (A^H WA)^{-1} A^H W \vec{y}\)</li>
+</ul></li>
+</ul>
+
+<h2>Least square problems linear regression</h2>
+
+<ul>
+<li>Problem we want to solve:
+<ul>
+<li>Suppose we observe \(m\) data points \((t_1,f_1),(t_2,f_2),...,(t_m,f_m) \in \mathbb{R}^2 \ or  \ \mathbb{C}^2\) We would like to estimate a slope \(a\in \mathbb{R}  \ or \ \mathbb{C}\) can an intercept \(b\in \mathbb{R}  \ or \ \mathbb{C}\) such that:
+<ul>
+<li>\(f_i = at_i + b\)</li>
+</ul></li>
+<li>For all \(i=1,2,...,m\). Suppose we choose a least squares error metric. Then we want to solve:
+<ul>
+<li>\(min_{a,b} \sum_{i=1}^{m} |f_i - (at_i +b)^2|\)</li>
+</ul></li>
+<li>We can pose this as a matrix form:
+<ul>
+<li>\(\vec{f} = \begin{bmatrix} f_1 \ f_2 \ ... \ f_m \end{bmatrix}\), \(A = \begin{bmatrix} t_1 \ 1 \ t_2 \ 1 \ ... \ t_m \ 1 \end{bmatrix}\), and \(\vec{c} = \begin{bmatrix} a \ b \end{bmatrix}\)</li>
+</ul></li>
+<li>The columns of \(A\) are linearly independent, unless the \(t_i\) are all equal</li>
+<li>Now finding a new \(a\) and \(b\) can be expressed as:
+<ul>
+<li>\(min_{\vec{c}} ||\vec{f}-A\vec{c}||_2^2\)</li>
+</ul></li>
+<li>Assume the \(t_i\) not all equal the optimal solution is given by 
+<ul>
+<li>\(\vec{c}' = (A^H A)^-1 A^H \vec{f}\)</li>
+</ul></li>
+<li>What if instead we had confidence in certain points
+<ul>
+<li>We can solve a weighted least square problem:
+<ul>
+<li>\(min_{a,b} \sum_{m}^{i=1} w_i |f_i - (at_i + b)|^2\)</li>
+</ul></li>
+<li>Where weights \(w_i\) are larger the more confident we are with \(f_i\)</li>
+</ul></li>
+<li>If \(t_i\) not all equal the optimal solution is:
+<ul>
+<li>\(\vec{c}' = (A^H W A)^-1 A^H W \vec{f}\)</li>
+</ul></li>
+<li>Where \(W\) is:
+<ul>
+<li>\(W = diag(w_1,w_2,...,w_m)\)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>Least Square problems: Other Lp norms</h2>
+
+<ul>
+<li>So far we only focused on \(l_2\) norms</li>
+<li>But what about the other \(l_p\) norms</li>
+<li>We can solve other \(l_p\) norms by using the <strong>iterative reweighted least squares</strong> (IRLS) algorithm:</li>
+<li><strong>Setup</strong>:
+<ul>
+<li>Suppose \(A\) is a real valued \(m \times n\) matrix when \(m \geq n\) and suppose the columns of \(A\) are linearly independent. Let \(\vec{y} \in \mathbb{R}^m\). Let \(p \in [1,\infty)\) with \(p \neq 2\). Then we want to solve:
+<ul>
+<li>\(min_{\vec{x}\in \mathbb{R}^n} ||\vec{y}-A\vec{x}||_p\)</li>
+</ul></li>
+<li>it follows that this has the same minimizer \(\vec{x}'\) as the weighted problem:
+<ul>
+<li>\(min_{\vec{x} \in \mathbb{R}^n} \sum_{m}^{i=1} w'_i |y_i - (A\vec{x})_i|^{2}\) </li>
+</ul></li>
+<li>Where the weights are given by:
+<ul>
+<li>\(w'_i = |y_i - (A\vec{x})_i|^{p-2}\)</li>
+</ul></li>
+<li>If we have the weights the optimal solution \(\vec{x}'\) is given by:
+<ul>
+<li>\(\vec{x}' = (A^H W' A)^{-1}A^H W' \vec{y}\)
+![[Pasted image 20240912163537.png]]</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+</body>
+</html>

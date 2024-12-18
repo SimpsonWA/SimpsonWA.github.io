@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h1>Non-parametric Density estimation</h1>
+
+<ul>
+<li>The model of the distribution utilizes all examples in \(\mathcal{D}\)</li>
+<li>As if all examples were parameters of the distribution</li>
+<li>Example: Kernel density estimation, nearest neighbor density estimation
+<h1>Parameter Estimation</h1></li>
+</ul>
+
+<h2>Maximum Likelihood Estimate (MLE):</h2>
+
+<ul>
+<li>Want to maximize
+$$
+p(\mathcal{D}|\theta,\zeta)
+$$</li>
+<li>Yields: 1 set of parameters \(\theta_{MLE}\)</li>
+<li><p>Target distribution is approximated by:
+$$
+\hat{p}(X) = p(X|\theta_{MLE})
+$$</p>
+
+<h2>Maximum a Posterior (MAP) estimation:</h2></li>
+<li><p>maximize :
+$$
+p(\theta,\zeta|\mathcal{D})
+$$</p></li>
+<li>Yields 1 set of parameters \(\theta_{MAP}\)</li>
+<li>Target distribution approximated by:
+$$
+\hat{p}(X) = p(X|\theta_{MAP})
+$$</li>
+</ul>
+
+</body>
+</html>

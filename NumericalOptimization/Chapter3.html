@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <ul>
+<li>Each Iteration of line search computes a direction \(p_{k}\) that decides how much to move along that direction. With an iteration given by:
+$$
+x_{k+1}= x_{k}+ \alpha_{k}p_{k}
+$$</li>
+<li>Where \(\alpha_{k}\) is the <strong>step length</strong> - which is a positive scalar</li>
+<li><strong>Descent Direction</strong> (\(p_{k}\)): \(p_{k}^{T}\nabla f_{k}&lt; 0\) , as this means the function \(f\) is being reduced along this direction</li>
+<li><strong>Search Direction</strong> given by:
+$$
+p_{k} = -B_{k}^{-1}\nabla f_{k}
+$$</li>
+<li>\(B_{k}\) is a symmetric and nonsingular matrix </li>
+<li><p>If \(B_{k}\) is positive definite:
+$$
+p_{k}^{T}\nabla f_{k}= - \nabla f_{k}^{T}B_{k}^{-1}\nabla f_{k}&lt; 0
+$$</p>
+
+<h2>3.1 Step Length</h2></li>
+<li><p>Want to compute \(\alpha_{k}\) as to have substantial reduction to \(f\), but don't want to spend too much time making the choice</p></li>
+<li>Ideal choice would be a global minimizer of the univariate function \(\phi (\cdot)\) defined as:
+$$
+\phi(\alpha) = f(x_{k}+ \alpha p_{k})
+$$</li>
+</ul>
+
+<h3>3.1.1 The Wolfe Conditions</h3>
+
+<ul>
+<li>\(\alpha_{k}\) should give sufficient decrease in the objective function \(f\) as measured by the inequality:
+$$
+f(x_{k}+ \alpha p_{k}) \leq f(x_{k}) + c_{1} \alpha \nabla f_{k}^{T}p_{k} \quad (3.6a)
+$$ [3.6a]</li>
+<li>for some constant \(c_{1}\in (0,1)\)</li>
+<li>This inequality is called _Armijo Condition_</li>
+<li>To rule out unacceptably short steps we introduce a second requirement called _curvature condition_ which requires \(\alpha_{k}\) to satisfy:
+$$
+\nabla f(x_{k}+ \alpha_{k}p_{k})^{T}p_{k} \geq c_{2}\nabla f_{k}^{T}p_{k}\quad (3.6b)
+$$</li>
+<li>for some constant \(c_{2}\in (c_{1}, 1)\)</li>
+<li>Note that the the left hand side is equal to the derivative of the univariate function \(\phi ' (\alpha_{k})\), so we are saying the slope of \(\phi\) at \(\alpha_k\) is greater than or equal to \(c_2\) times the initial slope \(\phi'(0) = \nabla f_{k}^{T}p_{k}\) </li>
+<li>(3.6a) and (3.6b) are known as the <strong>Wolfe conditions</strong></li>
+<li><strong>Strong Wolfe Conditions</strong>: Force \(\alpha_{k}\) to lie in at least a broad neighborhood of a local minimizer or stationary point of \(\phi\)
+<ul>
+<li>\(f(x_{k}+ \alpha_{k}p_{k}) \leq f(x_{k}) + c_{1}\alpha_{k}\nabla f_{k}^{T}p_{k} \quad (3.7a)\)</li>
+<li>\(|\nabla f(x_{k}+ \alpha_{k}p_{k})^{T}p_{k}| \geq c_{2}|\nabla f_{k}^{T}p_{k}|\quad (3.7b)\)</li>
+</ul></li>
+<li><strong>Lemma 3.1</strong>: Suppose that \(f: \mathbb{R}^{n}\rightarrow \mathbb{R}\) is continuously differentiable. Let \(p_{k}\) be a descent direction at \(x_{k}\) and assume \(f\) is bounded below along the ray \({x_{k}+ \alpha p_{k}| \alpha &gt; 0}\)  Then if \(0 &lt; c_{1}&lt; c_{2}&lt; 1\) there exists intervals of step lengths satisfying the Wolfe conditions (3.6) and the strong Wolfe conditions (3.7)</li>
+</ul>
+
+<h3>3.1.2 The Goldstein Conditions</h3>
+
+<ul>
+<li>Similar to Wolfe conditions Goldstein conditions ensure the step length \(\alpha\) achieves sufficient decrease but not too short </li>
+<li>Can be stated as a pair of inequalities given by:
+$$
+f(x_{k}) + (1-c) \alpha_{k}\nabla f_{k}^{T}p_{k}\leq f(x_{k}+ \alpha_{k}p_{k}) \leq f(x_{k})+c\alpha_{k}\nabla f_{k}
+$$</li>
+<li>1st inequality controls the step length</li>
+<li>2nd inequality ensures sufficient decrease conditions</li>
+</ul>
+
+<h3>3.1.3 Sufficient decrease and Backtracking</h3>
+
+<ul>
+<li>Backtracking algorithm makes sure the line search algorithm selects the appropriate step length</li>
+</ul>
+
+<pre><code>\begin{algorithm}
+    \caption{Backtracking}
+    \begin{algorithmic}
+      \Procedure{Backtracking}{}
+      \State choose \(\alpha &gt; 0\), \(\rho \in (0,1)\), \(c \in (0,1)\)
+      \State set \(\alpha \leftarrow \alpha\)
+      \State repeat until \(f(x_{k}+\alpha p_{k}) \leq f(x_{k}) + c \alpha \nabla f_{k}^{T}p_{k}\)
+      \State \(\alpha \leftarrow \rho \alpha\)
+      \State end repeat
+  \State \(\alpha_{k}= \alpha\)
+      \EndProcedure
+      \end{algorithmic}
+    \end{algorithm}
+</code></pre>
+
+<ul>
+<li>Commonly the contraction factor \(\rho\) is allowed to deviate each iteration of the line search </li>
+</ul>
+
+<h2>3.2 Convergence of Line Search Methods</h2>
+
+<ul>
+<li>To obtain global convergence we must also select a well chosen search direction \(p_{k}\)</li>
+<li>We will focus on one key property the angle \(\theta_{k}\) which is between \(p_{k}\) and has steepest descent direction \(-\nabla f_{k}\) defined by :
+$$
+cos(\theta_{k}) = \frac{-\nabla f_{k}^{T}p_{k}}{||\nabla f_{k}|| \ ||p_{k}||}
+$$
+<strong>Theorem 3.2</strong>:</li>
+<li>Consider any iteration of the form \(x_{k+1}= x_{k}+ \alpha_{k}p_{k}\) where \(p_{k}\) is a descent direction and \(\alpha_{k}\) satisfies the Wolfe conditions [3.6a]. Suppose that \(f\) is bounded below in \(\mathbb{R}^{n}\) and that \(f\) is continuously differentiable in an open set \(\mathcal{N}\) containing the level set \(\mathcal{L} := {x:f(x) \leq f(x_{0})}\), where \(x_{0}\) is the starting point of the iteration. Assume also that the gradient \(\nabla f\) is Lipschitz continuous on \(\mathcal{N}\) that is there exists a constant \(L>0\) such that:
+$$
+||\nabla f(x) - \nabla f(\hat{x})|| \leq L ||x - \hat{x}||
+$$</li>
+<li>For all \(x,\hat{x} \in \mathcal{N}\)</li>
+<li>Then:
+$$
+\sum\limits_{k \geq 0} cos^{2}(\theta_{k}) ||\nabla f_{k}||^{2} &lt; \infty \quad(3.14)
+$$</li>
+<li>We call the equation \((3.14)\) the <strong>Zoutendijk Condition</strong></li>
+<li>We can also say that \((3.14)\) implies that:
+$$
+cos^{2}(\theta_{k}) ||\nabla f_{k}||^{2} \rightarrow 0 \quad (3.16)
+$$</li>
+<li>If our method of choosing \(p_{k}\) ensures that \(\theta_{k}\) is bounded away from \(90 \degree\) then there is a positive constant \(\delta\) such that:
+$$
+cos(\theta_{k}) \geq \delta\geq 0 \quad for \ all \ k \quad (3.17)
+$$</li>
+<li>Then it also follows that:
+$$
+\lim_{k\rightarrow \infty} ||\nabla f_{k}|| =0 \quad (3.18)
+$$</li>
+<li>Which is to say the gradient norm converges to 0</li>
+<li><p>We use the term <strong>Globally Convergent</strong> to refer to algorithms in which \((3.18)\) is satisfied </p></li>
+<li><p>For newton-like methods \((3.1,3.2)\) if we assume matrix \(B_{k}\) is positive definite with a uniformly bounded condition number, there is a constant \(M\) such that:
+$$
+||B_{k}|| \ ||B_{k}^{-1}|| \leq M \quad \forall \ k
+$$</p></li>
+<li>From \((3.12)\) we can show that 
+$$
+cos(\theta_{k}) \geq \frac{1}{M}
+$$</li>
+<li>By combining this bound with \((3.16)\) we find 
+$$
+\lim_{k \rightarrow \infty} ||\nabla f_{k}|| = 0
+$$</li>
+<li>So this means the newton and quasi-newton methods are <strong>globally convergent</strong> if \(B_{k}\) has a bounded condition number and is positive definite</li>
+</ul>
+
+<h2>3.3 Rate of Convergence</h2>
+
+<h3>Convergence Rate of Steepest Descent</h3>
+
+<ul>
+<li>Ideal case: Objective function is quadratic and line searches are exact</li>
+<li>Suppose:
+$$
+f(x) = \frac{1}{2} x^{T}Qx - b^{T}x \quad (3.24)
+$$</li>
+<li>where \(Q\) is symmetric and positive definite</li>
+<li>Which means the gradient is:
+$$
+\nabla f(x) = Qx-b
+$$</li>
+<li>and the minimizer \(x^{*}\) is:
+$$
+Qx = b
+$$</li>
+<li>Compute the step length \(\alpha_k\) that minimizes \(f(x_{k} - \alpha \nabla f_{x})\) by differentiating the function:
+$$
+f(x_{k}- \alpha \nabla f_{x}) = \frac{1}{2} (x_{k}-\alpha \nabla f_{k})^{T}Q(x_{k}- \alpha \nabla f_{x})- b^{T}(x_{k}-\alpha \nabla f_{x})
+$$</li>
+<li>With respect to \(\alpha\) and setting it equal to 0 we obtain:
+$$
+\alpha_{k}= \frac{\nabla f_{k}^{T}\nabla f_{k}}{\nabla f_{k}^{T}Q \nabla f_{k}}
+$$</li>
+<li>If we use this minimizer the steepest descent iteration for 3.24 is given as:
+$$
+x_{k+1} = x_{k}- \frac{\nabla f_{k}^{T}\nabla f_{k}}{\nabla f_{k}^{T}Q \nabla f_{k}} \nabla f_{k} \quad (3.26)
+$$</li>
+<li>To quantify the rate of convergence we introduce the weighted norm (\(||x||_{Q}^{2}= x^{T}Qx\)) By using the relation \(Qx^{*}=b\) we can show that:
+$$
+\frac{1}{2}||x-x^{*}||_{Q}^{2} = f(x)-f(x^{*}) \quad (3.27)
+$$</li>
+<li>So by using (3.26) and noticing that \(\nabla f_{x}= Q(x_{k}-x^{*})\) we can derive:
+$$
+||x_{k+1}-x^{*}||_{Q}^{2} = {1-\frac{(\nabla f_{k}^{T}\nabla f_{k})^{2}}{(\nabla f_{k}^{T}Q \nabla f_{k})(\nabla f_{k}^{T}Q^{-1}\nabla f_{k})}} ||x_{k}-x^{*}||_{Q}^{2} \quad (3.27)
+$$</li>
+<li>This equation describes the exact decrease of \(f\) at each iteration</li>
+</ul>
+
+<p><strong>Theorem 3.3</strong>:
+- When the steepest descent method with exact line searches (3.26) is applied to the strongly convex quadratic function (3.24) the error norm (3.27) satisfies:
+$$
+\left\|x_{k+1}-x^*\right\|_Q^2 \leq\left(\frac{\lambda_n-\lambda_1}{\lambda_n-\lambda_1}\right)^2\left\|x_k-x^*\right\|_Q^2,
+$$
+- Where \(0 \leq \lambda_{1} \leq \lambda_{2} \leq ... \leq \lambda_{n}\) are the <strong>eigenvalues  of Q</strong></p>
+
+<p><strong>Theorem 3.4</strong>:
+- Suppose \(f : \mathbb{R}^{n}\rightarrow \mathbb{R}\) is twice differentiable and that the iterates generated by the steepest descent method with exact line searches converge to a point \(x^{*}\) at which the Hessian matrix \(\nabla^{2}f(x^{*})\) is positive definite; let \(r\) be any scalar satisfying:
+$$
+\operatorname{r} \in \left(\frac{\lambda_n-\lambda_1}{\lambda_n+\lambda_n}, 1\right),
+$$
+- where \(\lambda_{1} \leq \lambda_{2} \leq ... \leq \lambda_{n}\) are eigenvalues of the Hessian  \(\nabla^{2}f(x^{*})\). Then for all \(k\) sufficiently large we have:
+$$
+f\left(x_{k+1}\right) - f\left(x^*\right) \leq r^2 \left[f\left(x_k\right) - f\left(x^*\right)\right]
+$$
+
+
+<h3>Newtons Method</h3>
+
+<ul>
+<li><strong>Newtons Iteration search</strong> is given by:
+$$
+p_{k}^{N}=-\nabla^2 f_{k}^{-1} \nabla f_{k} \quad(3.30)
+$$
+<strong>Theorem 3.5</strong>:</li>
+<li>Suppose that \(f\) is twice differentiable and that the hessian matrix \(\nabla^{2}f(x)\) is <strong>Lipchitz continuous</strong> in a neighborhood of a solution \(x^{*}\) at which the sufficient conditions (Theorem 2.4) are satisfied. Consider the iteration \(x_{k+1}= x_{k}+ p_{k}\) where \(p_{k}\) is given as (3.30) then:</li>
+</ul>
+
+<ol>
+<li>If the starting point \(x_{0}\) is sufficiently close to \(x^{*}\) the sequence of iterates converges to \(x^{*}\)</li>
+<li>The rate of convergence of \({x_{k}}\) is quadratic and</li>
+<li>The sequence of gradient norms \({||\nabla f_{x}||}\) converges quadratically to zero </li>
+</ol>
+
+<h3>Quasi Newton Method</h3>
+
+<ul>
+<li>Suppose search direction has the form:
+$$
+p_k=-B_k^{-1} \nabla f_x \quad(3.34)
+$$</li>
+<li>Where \(B_{k}\) is updated at every iteration by a quasi-newton updating formula then:</li>
+</ul>
+
+<p><strong>Theorem 3.6</strong>:
+- Suppose that \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\) is twice differentiable. Consider the iteration  \(x_{k+1}= x_{k}+ \alpha_{k} p_{k}\)  where \(p_{k}\) is the descent direction and \(\alpha_{k}\) satisfies the Wolfe conditions. With \(C \leq \frac{1}{2}\). If sequence \({x_{k}}\) converges to a point \(x^{*}\) such that \(\nabla f(x^{*}) = 0\) is positive definite and if the search direction satisfies:
+$$
+\lim _{k \rightarrow \infty} \frac{\left\|\nabla f_k+\nabla^2 f_k p_k\right\|}{\left\|p_k\right\|}=0, \quad(3.35)
+$$
+- Then:
+1. Step length \(\alpha_{k}=1\) is admissible for all \(k\) greater than a certain index \(k_{0}\) and
+2. If \(\alpha_{k}=1\) for all \(k &gt; k_{0}\), \({x_{k}}\) converges to \(x^{*}\) superlinearly</p>
+
+<p><strong>Theorem 3.7:</strong>
+- suppose that \(f: \mathbb{R}^n \rightarrow \mathbb{R}\) Is twice diff. Consider the iteration \(x_{k+1}=x_k+p_k\) (that is \(\alpha_k=1\) ) and \(p_k\) is given by 3.34 .,t so assure that \(\left{x_{k}\right}\) converges to a point \(x^_\) such that \(\nabla f(x^{*})=0\) and \(\nabla^2 f\left(x^*\right)\) is positive definite. Then \(\left{x_{k}\right}\) converges super linearly if and only if (3.36) holds</p>
+
+<h2>3.4 Newton's Method with Hessian modification</h2>
+
+<ul>
+<li>Away from the solution the Hessian matrix \(\nabla^{2} f(x)\) may not be positive defiinite so the newton direction \(p_{n}^{N}\) defined by</li>
+</ul>
+
+<p>$$
+\nabla^{2} f\left(x_{k}\right) p_{k}^{N}=-\nabla f\left(x_{k}\right)
+$$</p>
+
+<ul>
+<li>may not be the descent direction</li>
+<li><p>We can solve this issue using direct linear algebra such as gaussian elimination where we modify the hessian matrix adding either a positive diagonal matrix or full matrix to the hessian\(\nabla^{2} f\left(x_{k}\right)\)</p></li>
+<li><p>Bounded modified factorization property:</p></li>
+</ul>
+
+<p>$$
+\kappa\left(B_{k}\right)=\left\|B_{k}\right\| \left\|B_{k}^{-1}\right\| \leq C \quad \text { some } C &gt; 0 \quad \forall k=0,1,2, \ldots
+$$</p>
+
+<p><strong>Theorem 3.8:</strong>
+- let \(f\) be twice differentiable on an open set \(D\) and assume the starting point \(x_{0}\) of algo 3.2 is such than the level set \(\mathcal{L}:=\left{x \in D: f(x) \leq f\left(x_{0}\right)\right}\) is compact. The it the bounded modification property holds we have :</p>
+
+<p>$$
+\lim _{k \rightarrow \infty} \nabla f\left(x_{n}\right)=0
+$$</p>
+
+<h3>Eigenvalue modification</h3>
+
+<ul>
+<li>Consider a problem where at current iteration \(x_{k}, \nabla f\left(x_{k}\right)=(1,-3,2)^{\top}\) and \(\nabla^{2} f\left(x_{k}\right)=\operatorname{diag}(10,3,-1)\) which is indefinite. By spectral decomposition theorem we have \(Q=1\) and \(\Lambda=\operatorname{diay}\left(\lambda_{1}, \lambda_{2}, \lambda_{3}\right)\) and we write:</li>
+</ul>
+
+<p>$$
+\nabla^{2} f\left(x_{k}\right)=Q \Lambda Q^{\top}=\sum_{i=1}^{n} \lambda_{i} q_{i} q_{i}^{\top} \quad(3.40)
+$$</p>
+
+<ul>
+<li>the pure newton step  (Solution of 3.38 ) is \(p_{k}^{n}=(-.1,1,2)^{\top}\) which is not descending since \(\nabla f\left(x_{k}\right)^{\top} p_{k}^{n}&gt;0\).</li>
+<li>A modified strategy would be to replace \(\nabla^{2} f\left(x_{n}\right)\) by a positive definite approximation \(B_{k}\). Where all negative eigenvalues are replaced with a small positive number \(\delta\) this would resulting:</li>
+</ul>
+
+<p>$$
+B_{k}=\sum_{2=1}^{2} \lambda_{i} q_{i} q_{i}^{\top}+\delta q_{3} q_{3}^{\top}=\operatorname{diag}\left(10,3,10^{-8}\right)
+$$
+- note that the search direction is now</p>
+
+<p>$$
+p_{k}=B_{k}^{-1} \nabla f_{k}=-\left(2 \times 10^{8}\right) q_{3}
+$$</p>
+
+<h2>3.5 step-length selection Algorithms</h2>
+
+<ul>
+<li>Now consider techniques for finding a minimum of the one dimensional function:</li>
+</ul>
+
+<p>$$
+\begin{equation_}
+\phi(\alpha)=f\left(x_{k}+\alpha p_{k}\right) \tag{3.54}
+\end{equation_}
+$$</p>
+
+<ul>
+<li>or for simply finding the step length \(\alpha_{k}\)</li>
+<li>we assume \(p_{k}\) is a descent direction \(\left(\phi^{\prime}(0)&lt;0\right)\)</li>
+<li>If \(f\) is quadratic \(\left(f(x)=\frac{1}{2} x^{\top} Q x-b^{\top} x\right)\) its 1 dimensional minimizer along the ray \(x_{k}+\alpha p_{k}\) is given by:</li>
+</ul>
+
+<p>$$
+\alpha_{k}=-\frac{\nabla f_{k}^{\top} p_{k}}{p_{k}^{\top} Q p_{k}}
+$$</p>
+
+<p>Typical procedures are broken up into 2 sections:
+    1.) Bracketing Phase: finds an enteral \([\bar{a}, \bar{b}]\) Containing acceptable search lengths
+    2.) Selection plane: Zooms \(u\) to locate the final search length.</p>
+
+<h3>Interpolation</h3>
+
+<ul>
+<li>The aim is to find a \(\alpha\) that satisfies the sufficient decrease condition (3.6a)</li>
+<li>We can write the sufficient decrease condition in the notation of (3.54) as:</li>
+</ul>
+
+<p>$$
+\phi\left(\alpha_{k}\right) \leq \phi(0)+c_{1} \alpha_{k} \phi^{\prime}(0)
+$$</p>
+
+<ul>
+<li>\(C_{1}\) is usually small in practice \(\left(c_{1}=10^{-4}\right.\) commonly)</li>
+<li>Suppose initial guess \(\alpha_{0}\) is given. It we have</li>
+</ul>
+
+<p>$$
+-\phi\left(\alpha_{0}\right) \leq \phi(0)+c_{1} \alpha_{0} \phi^{\prime}(0)
+$$</p>
+
+<ul>
+<li>This step length satisfies the condition, and we terminate the search. Otherwise we know that the interval \([0, \infty]\) contains acceptable step lengths.</li>
+<li>we form a quadratic approximation \(\phi_{q}(\alpha)\) as:</li>
+</ul>
+
+<p>$$
+\begin{array}{r}
+\phi_{q}(\alpha)=\left(\frac{\phi\left(\alpha_{0}\right)-\phi(0)-\alpha_{0} \phi^{\prime}(0)}{\alpha_{0}^{2}}\right)^{\prime} \alpha^{2}+\phi^{\prime}(0) \alpha+\phi(0)  \tag{3.57}\</p>
+
+<p>\end{array}
+$$</p>
+
+<ul>
+<li>The new trial value \(\alpha_{1}\) is defined as the minimizer of his quadratic:</li>
+</ul>
+
+<p>$$
+\alpha_{1}=-\frac{\phi^{\prime}(0) \alpha_{0}^{2}}{2\left[\phi\left(\alpha_{0}\right)-\phi(0)-\phi^{\prime}(0) \alpha_{0}\right]} \quad(3.58)
+$$</p>
+
+<ul>
+<li>If sufficient decrease condition (3.56) holds true we terminate here. Otherwise we construct a cubic function that interpolates \(\left(\phi(0), \phi^{\prime}(0), \phi\left(\alpha_{0}\right), \phi\left(\alpha_{1}\right)\right)\)</li>
+</ul>
+
+<p>$$
+\phi_{c}(\alpha)=a \alpha^{3}+b \alpha^{2}+\alpha \phi^{'}(0)+\phi(0)
+$$</p>
+
+<p>Where:</p>
+
+<p>$$
+\left[\begin{array}{l}
+a \
+b
+\end{array}\right]=\frac{1}{\alpha_{0}^{2} \alpha_{1}^{2}\left(\alpha_{1}-\alpha_{0}\right)}\left[\begin{array}{cc}
+\alpha_{0}^{2} &amp; -\alpha_{1}^{2} \
+-\alpha_{0}^{3} &amp; \alpha_{1}^{3}
+\end{array}\right]\left[\begin{array}{l}
+\phi\left(\alpha_{1}\right)-\phi(0)-\phi^{\prime}(0) \alpha_{1} \
+\phi\left(\alpha_{0}\right)-\phi(0)-\phi^{\prime}(0) \alpha_{0}
+\end{array}\right]
+$$</p>
+
+<ul>
+<li>So by differentiating \(\phi_{c}(x)\), we see the minimizer \(\alpha_{2}\) of \(\phi_{c}\) lies on the interval \(\left[0, \alpha_{1}\right]\) and is given by:</li>
+</ul>
+
+<p>$$
+\alpha_{2}=\frac{-b \pm \sqrt{b^{2}-3 a \phi^{\prime}(0)}}{3 a}
+$$</p>
+
+<ul>
+<li>If necessary this process is repeated.</li>
+<li>suppose we have an atonal \([\bar{a}, \bar{b}]\) known to contain desirable step lengths and 2 previous step length estimates \(\alpha_{i-1}\) and \(\alpha_{i}\) in this interval.</li>
+<li>we un e the cubic function to interpolate: \(\phi\left(\alpha_{i-1}\right), \phi^{\prime}\left(\alpha_{i-1}\right)\) ) \(\phi\left(\alpha_{2}\right), \phi^{\prime}\left(\alpha_{2}\right)\)</li>
+<li>The minimizer of this cubic is given by:
+<ul>
+<li>\(\alpha_{i+1}=\alpha_{i}-\left(\alpha_{i}-\alpha_{i-1}\right)\left[\frac{\phi^{\prime}\left(\alpha_{i}\right)+\partial_{2}-\partial_{1}}{\phi^{\prime}\left(\alpha_{i}\right)-\phi^{\prime}\left(\alpha_{i-1}\right)+2 \partial_{2}}\right]\)</li>
+<li>\(\partial_{1}=\phi^{\prime}\left(\alpha_{i-1}\right)+\phi^{\prime}\left(\alpha_{i}\right)-3 \frac{\phi\left(\alpha_{i}-1\right)-\phi\left(\alpha_{i}\right)}{\alpha_{i-1}-\alpha_{i}}\)</li>
+<li>\(\partial_{2}=\operatorname{sign}\left(\alpha_{i}-\alpha_{i-1}\right)\left[\partial_{1}^{2}-\phi^{\prime}\left(\alpha_{i-1}\right) \phi^{\prime}\left(\alpha_{i}\right)\right]^{1 / 2}\)</li>
+</ul></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <p>Using example</p>
+
+<p>$$
+P(mistake) = P(X \in R_{1}, Digit = 2) + P(X \in R_{2}, Digit = 1) = P(X\in R_1,C_{2})+  P(X\in R_{2},C_{1})
+$$
+- if \(X\) is discrete:
+$$
+P(mistake)= \sum\limits_{X\in R_{1}} P(X,C_{2}) + \sum\limits_{X \in R_{2}} P(X,C_{1})
+$$
+- if \(X\) is continuous:
+$$
+P(mistake)= \int\limits_{ R_{1}} P(X,C_{2}) + \int\limits_{ R_{2}} P(X,C_{1})
+$$
+- Assign \(X\) to \(R_k\) to minimize the misclassification rate or increase the correct rate:
+$$
+P(correct) = P(X \in R_{1},C_{1}) + P(X \in R_{2},C_{2})  = \sum\limits_{k=1}^{k} P(X\in R_K,C_k)
+$$
+- For discrete:
+$$
+P(correct) = \sum\limits_{k=1}^{k} \sum\limits_{X \in R_k} P(X,C_k)
+$$
+- For Continuous:
+$$
+P(correct) = \sum\limits_{k=1}^{k} \int_{R_k} P(X,C_{k})
+$$</p>
+
+<h1>Making Decisions with Loss/Utility Function:</h1>
+
+<ul>
+<li>So far we have considered each misclassification as equally bad, or each correct classification as equally good; but this isn't applicable in the real world</li>
+<li>For example imagine a space shuttle launching given all the data what is less risky:
+<ul>
+<li>Incorrect prediction of damage (no launch) is better than incorrect prediction of no damage (launch, damage)</li>
+</ul></li>
+<li>We can describe this using a <strong>loss matrix</strong> by:</li>
+</ul>
+
+<p>
+    <strong>Payoff Matrix:</strong>
+</p>
+<table border="1">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Damage</th>
+            <th>No damage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Damage</strong></td>
+            <td>0</td>
+            <td>10000</td>
+        </tr>
+        <tr>
+            <td><strong>No Damage</strong></td>
+            <td>10</td>
+            <td>0</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <strong>Utility Matrix (U<sub>k</sub>):</strong>
+</p>
+<table border="1">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Damage</th>
+            <th>No damage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Damage</strong></td>
+            <td>100</td>
+            <td>-10000</td>
+        </tr>
+        <tr>
+            <td><strong>No Damage</strong></td>
+            <td>-10</td>
+            <td>100</td>
+        </tr>
+    </tbody>
+</table>
+
+- The expected loss of \(X\) is:
+$$
+\sum\limits_{k=1}^{k} L_{kj}P(X,C_k)
+$$
+- Overall expected loss:
+$$
+E(L) = \sum\limits_{k=1}^{k}  \sum\limits_{j=1}^{k} \int_{R_{j}}L_{jk} P(X,C_{k}) dx
+$$</p>
+
+<h1>Decision Theory</h1>
+
+<ul>
+<li><p>Decision theory is a calculus for decision making under uncertainty which invalues:</p>
+
+<ul>
+<li>Set of primitive outcomes: such as \(A,B,...,Flying,Etc\)</li>
+<li>Preferences on outcomes: \(A \succ B\)</li>
+<li>Subjective degrees of belief (Probabilities)</li>
+<li>Lotteries: uncertain outcomes \(L = [P_1,S_1;P_2,S_2;...;P_n,S_n]\) \
+![[Pasted image 20241026142922.png]]
+<h2>Axioms of Preference</h2></li>
+</ul></li>
+<li><p><strong>Orderability</strong>: Exactly on of \(A \succ B,\ B \succ A\), or \(A \sim B\) holds true</p></li>
+<li><strong>Transitivity</strong>: if \(A \succ B\) and \(B \succ C\) then \(A \succ C\)</li>
+<li><strong>Continuity</strong>: if \(A \succ B \succ C\) then there exists P such that \([P,A; 1-P,C] \sim B\) 
+![[Pasted image 20241026143225.png]]</li>
+<li><strong>Substitutability</strong>: if \(A \succ B\) then \([P,A;1-P,C] \sim [P,B;1-P,C]\)
+![[Pasted image 20241026144122.png]]</li>
+<li><strong>Monotonicity</strong>: if \(A \succ B\) and \(P>Q\) then \([P,A;1-P,B] \succ [Q,A;1-Q,B]\)
+![[Pasted image 20241026144106.png]]</li>
+<li><strong>Decomposability</strong>: \([P,A; 1-P,[Q,B; 1-Q,C]] \sim [P,A;(1-P)Q,B;(1-P)(1-Q),C]\)
+![[Pasted image 20241026144243.png]]</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h2>Overview:</h2>
+
+<ul>
+<li>In problems its useful to factorize a matrix, writing it as a product of other matrices:</li>
+<li><strong>Factorizations</strong>:
+<ul>
+<li>LU-Decomposition: Useful for solving \(A\vec{x} = \vec{b}\) without computing \(A^{-1}\)</li>
+<li>Cholesky Decomposition: useful for statistical signal processing, and kalman filtering</li>
+<li>QR-Decomposition: Useful for least square problems</li>
+</ul></li>
+</ul>
+
+<h2>LU Factorization:</h2>
+
+<ul>
+<li>In LU factorization we write a square (\(n \times n\)) matrix \(A\) as:
+$$
+A = LU \quad (1)
+$$</li>
+<li><p>Where:</p>
+
+<ul>
+<li>\(L\): is the \((n \times n)\) and lower 1's on the diagonal </li>
+<li>\(U\) is the \((n \times n)\) and upper Triangle
+$$
+L = \begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp;0 \\
+l_{21} &amp;1 &amp;0 &amp;0\\
+l_{31} &amp;l_{32} &amp;1 &amp;0 \\
+. &amp; . &amp; . &amp; .\\
+l_{n1} &amp;l_{n2} &amp;.... &amp;1
+\end{bmatrix} \quad (2)
+$$
+$$
+U = \begin{bmatrix}
+u_{11} &amp; u_{12}  &amp; u_{13} &amp;... &amp;u_{1n} \\
+0 &amp; u_{22} &amp; u_{23} &amp; ... &amp;u_{2n}\\
+0 &amp; 0 &amp; u_{33} &amp; ... &amp;u_{3n} \\
+. &amp; . &amp; . &amp; . &amp; .\\
+0 &amp; 0 &amp; 0 &amp; ... &amp;u_{nn}
+\end{bmatrix} \quad (3)
+$$
+<h3>LU Factorization: Solving Linear Equations:</h3></li>
+</ul></li>
+<li><p>Suppose we want to solve \(A\vec{x} = \vec{b}\) without computing \(A^{-1}\) </p></li>
+<li>If we know \(A = LU\) then we can write:
+$$
+LU\vec{x} = \vec{b}
+$$</li>
+<li><p>given \(\vec{b}\) we want to solve \(LU\vec{x} = \vec{b}\) for \(\vec{x}\) </p></li>
+<li><p><strong>Steps</strong>:</p>
+
+<ul>
+<li>Define the vector \(\vec{y} = U \vec{x}\) in terms of the solution \(\vec{x}\) we are looking for</li>
+<li>Since \(\vec{x}\) is unknown and so is \(\vec{y}\) now \(LU\vec{x} = \vec{b}\) becomes \(L\vec{y} = \vec{b}\)</li>
+<li>We will first solve \(L\vec{y} = \vec{b}\) for \(\vec{y}\) </li>
+<li>Then we will solve for \(U\vec{x} =\vec{y}\)  for \(\vec{x}\)</li>
+</ul></li>
+<li>Solving for \(L\vec{y}= \vec{b}\) for \(\vec{y}\):
+$$
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp;0 \\
+l_{21} &amp;1 &amp;0 &amp;0\\
+l_{31} &amp;l_{32} &amp;1 &amp;0 \\
+. &amp; . &amp; . &amp; .\\
+l_{n1} &amp;l_{n2} &amp;.... &amp;1
+\end{bmatrix} 
+\begin{bmatrix}
+y_1\\
+y_2\\
+y_3\\
+.\\
+y_n\\
+\end{bmatrix} = 
+\begin{bmatrix}
+b_1\\
+b_2\\
+b_3\\
+.\\
+b_n\\
+\end{bmatrix} \quad (4)
+$$
+<ul>
+<li>So we can see that \(y_1 = b_1\)</li>
+<li>and \(y_2 = b_2 - l_{21}y_1\) and so on</li>
+<li>in general we can see that: 
+$$
+y_j = b_j - \sum_{i=1}^{j-1} l_{ji}y_{i} \quad (5)
+$$</li>
+</ul></li>
+<li><p>In total it requires about \(\frac{n^2}{2}\) operations to find \(y\)</p></li>
+<li><p>After we know \(\vec{y}\) we can solve for \(U\vec{x} = \vec{y}\) to find \(\vec{x}\) 
+$$
+\begin{bmatrix}
+u_{11} &amp; u_{12}  &amp; u_{13} &amp;... &amp;u_{1n} \\
+0 &amp; u_{22} &amp; u_{23} &amp; ... &amp;u_{2n}\\
+0 &amp; 0 &amp; u_{33} &amp; ... &amp;u_{3n} \\
+. &amp; . &amp; . &amp; . &amp; .\\
+0 &amp; 0 &amp; 0 &amp; ... &amp;u_{nn}
+\end{bmatrix} \begin{bmatrix}
+x_1\\
+x_2\\
+x_3\\
+.\\
+x_n\\
+\end{bmatrix} = 
+\begin{bmatrix}
+y_1\\
+y_2\\
+y_3\\
+.\\
+y_n\\
+\end{bmatrix} \quad (6)
+$$</p></li>
+</ul>
+
+<h2>Cholesky Factorization:</h2>
+
+<ul>
+<li><strong>Positive Definite Matrix</strong>: Let \(A\) be a square \((n \times n )\) Hermitian symmetric matrix. We say that \(A\) is positive definite if:
+$$
+\vec{x}^{H} A \vec{x} &gt; 0 \quad (7)
+$$
+<ul>
+<li>Holds for all nonzero \(\vec{x} \in \mathbb{R}^n\) (or \(\mathbb{C}^n\))</li>
+</ul></li>
+<li>In Cholesky factorization we can write a square \((n \times n)\) Hermitian symmetric positive definite matrix \(A\) as:
+$$
+A = LL^{H} \quad (8)
+$$</li>
+<li>Where \(L\) is \((n\times n)\) and lower triangle with positive entries on the diagonal </li>
+</ul>
+
+<h4>Cholesky Factorization: Solving Linear Equations</h4>
+
+<ul>
+<li>Can use Cholesky factorization to solve for \(A\vec{x} = \vec{b}\) without computing \(A^{-1}\) </li>
+<li><p>Write \(A\vec{x} = LL^{h}\vec{x} = \vec{b}\) Given \(\vec{b}\) we want to solve \(LL^{h}\vec{x} = \vec{b}\) for \(\vec{x}\) :</p>
+
+<h5>Steps</h5></li>
+<li><p>Define a Vector:
+$$
+\vec{y} = L^{H}\vec{x} \quad (9)
+$$</p></li>
+<li>in terms of \(\vec{x}\) we are looking for</li>
+<li>since \(\vec{x}\) is unknown, so is \(\vec{y}\) </li>
+<li>We can 1st solve for \(L\vec{y} = \vec{b}\) for \(\vec{y}\)</li>
+<li>Then we can solve for \(L^{H}\vec{x} = \vec{y}\) for \(\vec{x}\)</li>
+</ul>
+
+<h2>QR Factorization:</h2>
+
+<ul>
+<li><p><strong>Unitary matrix</strong>: let \(Q\) be a square \((n\times n)\) matrix. We say \(Q\) is unitary (or orthogonal) if:
+$$
+Q^{H}Q = I_{n\times n} \quad(10)
+$$</p>
+
+<h3>Properties of Unitary Matrices:</h3></li>
+<li><p>A square (\(n \times n\)) matrix is unitary if and only if all of its columns are orthonormal. Similarly a square matrix is unitary if and only if all of its rows are orthonormal </p></li>
+<li>If \(Q\) is unitary, it also follows that \(QQ^{H} = I\) and \(Q^{-1} = Q^{H}\) </li>
+<li><strong>Isometric Property</strong>: an \(n \times n\) matrix \(Q\) is unitary if and only if:
+$$
+||Q\vec{x}||_{2}  = \sqrt{\vec{x}^H Q^H Q \vec{x}} = \sqrt{\vec{x}^H \vec{x}} = ||\vec{x}||_2 \quad (11)
+$$</li>
+<li>\((11)\) for all \(\vec{x} \in \mathbb{R}^n\) or \(\mathbb{C}^n\)</li>
+<li>\((11)\): Therefore if \(Q\) is unitary we will have:
+$$
+||Q||_2 = 1 \quad ||Q^{-1}||_2 = 1 \quad (12)
+$$</li>
+<li><p>\((12)\) and so:
+$$
+\kappa_{2}(Q) = 1 \quad (13)
+$$</p></li>
+<li><p>In QR Decomposition we can write an \(m \times n\) matrix \(A\) as:
+$$
+A = QR \quad (14)
+$$</p></li>
+<li>Where:
+<ul>
+<li>\(Q\) is unitary and \(m \times n\)</li>
+<li>\(R\) is upper triangle and \(m \times n\)  </li>
+</ul></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h1>Sum rule and Marginal Probability</h1>
+
+<ul>
+<li>The probability that \(X\) will take the value \(x_i\) regardless of \(Y\) is written as:
+$$
+P(X = x_i)
+$$</li>
+<li>\(P(X = x_i)\) is given by the fraction of the total number of points that fall in column \(i\):
+$$
+P(X = x_{i)}= \frac{c_i}{N}
+$$</li>
+<li>Obviously we have \(c_{i}= \sum_{j} n_{ij}\) thus:
+$$
+P(X=x_{i)}= \sum_{j=1}^{L} P(X=x_i,Y=y_j)
+$$</li>
+<li>This is called the <strong>sum rule</strong></li>
+<li>\(P(X=x_i)\) is called marginal probability</li>
+</ul>
+
+<h1>Product Rule and Conditional Probability</h1>
+
+<ul>
+<li>If we consider only the instances when \(X=x_i\) then the fraction of such instances for which \(Y = y_j\) is written as \(P(Y=y_{j} | X= x_i)\) and it is called the <strong>conditional probability</strong> of \(Y=y_j\)  given \(X = x_i\)
+$$
+P(Y=y_{j} | X= x_{i)}= \frac{n_{ij}}{c_{i}}
+$$</li>
+<li>We can then derive:
+$$
+P(Y=y_{j} , X= x_{i})= \frac{n_{ij}}{c_{i}} = \frac{n_{ij}}{c_{i}} \frac{c_i}{N}=P(Y=y_{j} | X= x_{i})_P(X=x_i)
+$$</li>
+<li>This is called the <strong>product rule</strong></li>
+</ul>
+
+<h1>Bayes' Theorem</h1>
+
+<ul>
+<li>Bayes' theorem is a combination of the symmetry property \(P(X,Y) = P(Y,X)\) with conditional properties:
+$$
+P(Y|X) = \frac{P(X|Y)*P(Y)}{P(X)}
+$$
+
+</body>
+</html>

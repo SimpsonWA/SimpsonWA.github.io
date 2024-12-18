@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h3>Problem of Overfitting</h3>
+
+<ul>
+<li><strong>Issue</strong>: When the number of parameters is large compared to the number of data points available for training, there is a high risk of <strong>overfitting</strong>. Overfitting leads to models that capture noise rather than general patterns, resulting in poor performance on new data.</li>
+</ul>
+
+<h3>Solution: Regularization</h3>
+
+<ul>
+<li><strong>Objective</strong>: Improve prediction accuracy by reducing model complexity.
+<ul>
+<li>One approach is to set some coefficients to 0, which reduces the model's complexity, introduces <strong>bias</strong>, but helps decrease <strong>variance</strong>.</li>
+<li>This trade-off between bias and variance helps in achieving better generalization.</li>
+</ul></li>
+</ul>
+
+<h2>Ridge Regression</h2>
+
+<ul>
+<li><p><strong>Objective</strong>: To fit a linear model that minimizes the error while penalizing large coefficients to reduce overfitting.</p>
+
+<h3>Ordinary Least Squares (OLS) Error:</h3></li>
+<li><p>The error function, \(J_{n}(w)\), for a simple least squares fit is defined as:
+$$
+J_{n}(w) = \frac{1}{n} \sum\limits_{i=1}^{n} (y_{i}- w^{T}x_{i})^{2}
+$$</p>
+
+<ul>
+<li>To find the optimal weights \(w^{*}\), we solve:
+$$
+w^{*}= argmin_{w} \frac{1}{n} \sum\limits_{i=1}^{n} (y_{i}- w^{T}x_{i})^{2}
+$$
+<h3>Ridge Regression with Regularization:</h3></li>
+</ul></li>
+<li><p>In <strong>Ridge Regression</strong>, a penalty term is added to the OLS error function to discourage large weights:
+$$
+J_{n}(w) = \frac{1}{n} \sum\limits_{i=1}^{n} (y_{i}- w^{T}x_{i})^{2} + \lambda||\vec{w}||^{2}
+$$</p>
+
+<ul>
+<li>Here, \(||w||^{2} = \sum_{i=1}^{d} w_{i}^{2}\) is the <strong>L2 norm</strong> (sum of squared weights).</li>
+<li>\(\lambda \geq 0\) is a <strong>regularization parameter</strong> that controls the penalty applied to larger weights.</li>
+</ul></li>
+<li><p><strong>Shrinkage</strong>: The penalty term \(||w||^{2}_{l2}\) discourages large coefficients, effectively “shrinking” coefficients with low predictive power toward zero, reducing their impact on the model.</p></li>
+<li><strong>Interpretation</strong>: If a feature (associated with \(x_j\)) contributes little to reducing error, the penalty term will “shut down” its associated weight, making the model simpler.</li>
+</ul>
+
+<h3>Regularized Solution to Linear Regression:</h3>
+
+<ul>
+<li>With regularization, the solution for the optimal weights \(w^{*}\) in <strong>Ridge Regression</strong> becomes:
+$$
+w^{*}= (\lambda I + \vec{x}^{T}\vec{x})^{-1}\vec{x}^{T}\vec{y}
+$$
+<ul>
+<li>Here, \(I\) is the identity matrix, and \(X^{T} X\) represents the correlation matrix of the features.</li>
+</ul></li>
+<li><strong>Regularization Summary</strong>: Adding the \(\lambda\) term is a form of <strong>regularization</strong>, controlling the balance between minimizing error and constraining model complexity, which helps prevent overfitting.</li>
+</ul>
+
+</body>
+</html>

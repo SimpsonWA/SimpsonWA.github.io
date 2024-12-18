@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h2>Condition Number;</h2>
+
+<ul>
+<li>Return to the case when \(A\vec{x}=\vec{y}\) has an exact solution</li>
+<li>We will also assume \(A\)  is square \((n \times n)\) and invertible</li>
+<li>Question of interest: How badly could errors in \(\vec{y}\) affect the recovered soltuion \(A^{-1}\vec{y}\)</li>
+<li><strong>Setup</strong>:
+<ul>
+<li>let \(A\) be \(n \times n\) and invertible</li>
+<li>let \(\vec{y}\) be the <strong>noise free observations</strong> for some original vector \(\vec{x}\)</li>
+<li>Let \(\vec{y}' = \vec{y} +\triangle \vec{y}\) be the <strong>corrupted observations</strong></li>
+<li>Let \(\vec{x}' = A^{-1}\vec{y}\) be the recovered solution using corrupted obsrevations</li>
+<li>writing \(\vec{x}' = \vec{x} + \triangle \vec{x}\) we have:
+<ul>
+<li>\(\vec{x} + \triangle \vec{x} = A^{-1}(\vec{y}+ \triangle \vec{y}) = A^{-1}\vec{y}+A^{-1} \triangle \vec{y}\)</li>
+</ul></li>
+<li>Since \(\vec{x} = A^{-1}\vec{y}\) then we will have \(\triangle \vec{x} = A^{-1} \triangle \vec{y}\)</li>
+<li>1 interesting question is how does the relative error in the observations \(\frac{|||\triangle \vec{y}|}{|||\vec{y}|}\) compare to \(\frac{|||\triangle \vec{x}|}{|||\vec{x}|}\)</li>
+</ul></li>
+</ul>
+
+<h2>Condition Number Derivation:</h2>
+
+<ul>
+<li><strong>Condition Number</strong>: The condition number of a \(n \times n\) invertible matrix \(A\) is defined to be the following quantity:
+<ul>
+<li>\(\kappa(A):= ||A||||A^{-1}||\)</li>
+<li>When an \(l_p\) norm is used, the condition number is somtimes denoted:
+<ul>
+<li>\(\kappa(A):= ||A||_p||A^{-1}||_p\)</li>
+</ul></li>
+</ul></li>
+<li>Properties:
+![[Pasted image 20240912164634.png]]</li>
+</ul>
+
+
+</body>
+</html>

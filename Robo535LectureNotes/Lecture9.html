@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h1>Learning Via Parameter Estimation</h1>
+
+<ul>
+<li><strong>Basic Setting</strong>:
+<ul>
+<li>A set of random variables \(X = {X_{1},...,X_{D}}\)</li>
+<li>A model of the distribution over the variables in \(X\) with parameters \(\theta : \hat{p}(X|\theta)\)</li>
+<li>Data (a set of observations) \(\mathcal{D} = {x_{1},...,x_{N}}\)</li>
+</ul></li>
+<li><strong>Objective</strong>:
+<ul>
+<li>Find parameters \(\theta\) such that \(P(X|\theta)\) fits data \(\mathcal{D}\) the best</li>
+</ul></li>
+</ul>
+
+<h1>Bernoulli Distribution:</h1>
+
+<ul>
+<li>The distribution over \(x\) for the coin flipping example can be written as;
+$$
+Bern(x|\mu) = \mu^{x}(1-\mu)^{1-x} \quad \quad x\in {0,1}
+$$</li>
+<li>This is known as Bernoulli distribution</li>
+<li>We can say that:
+<ul>
+<li>\(\mathbb{E}(x) = \mu\)</li>
+<li>\(var[x] = \mu (1- \mu)\)</li>
+</ul></li>
+</ul>
+
+<h1>Maximum Likelihood Estimation (MLE): Coin Example</h1>
+
+<ul>
+<li>Assume we have a data set \(\mathcal{D} = {x_{1},..,x_{N}}\) of observed values of \(x\). We can construct the likelihood function, which is a function of \(\mu\), on the assumption that the observations are drawn independently from the \(p(x|\mu)\) so that :
+$$
+p(\mathcal{D}|\mu) = \Pi_{i=1}^{N}p(x_{i}|\mu) = \Pi_{i=1}^{N} \mu^{x_{i}}(1-\mu)^{1-x_{i}}
+$$</li>
+<li>In a frequentist setting we can estimate the value of \(\mu\) by maximizing the likelihood function:
+$$
+ln(p(\mathcal{D}|\mu)) = \sum\limits_{i=1}^{N} p(x_{i}|\mu) = \sum\limits_{i=1}^{N} {x_{i}ln(\mu) + (1-x_{i})ln(1-\mu)}
+$$</li>
+<li>Setting the derivative of \(ln(p(\mathcal{D}|\mu))\) with respect to \(\mu\) to 0 we obtain:
+$$
+\hat{\mu}_{MLE} = \frac{1}{N}\sum\limits_{i=1}^{N} x_{i} = \frac{m}{N}
+$$</li>
+<li>Where the number of observations of \(x=1\) (heads) within this dataset</li>
+</ul>
+
+<p>![[Pasted image 20241102092754.png]]</p>
+
+</body>
+</html>

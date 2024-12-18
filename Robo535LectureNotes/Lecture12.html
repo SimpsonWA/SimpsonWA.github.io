@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with MathJax</title>
+    
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+    <h1>2 Rules for design of a nonparametric density estimator:</h1>
+
+<ol>
+<li>To estimate the probability density at a particular location, we should consider the data points that lie within some local neighborhood of that point</li>
+<li>The value of the smoothing parameter should be neither too large nor too small in order to obtain good results 
+<h1>Design a nonparametric density estimator:</h1></li>
+</ol>
+
+<ul>
+<li><strong>Problem</strong>: Suppose we have observations from an unknown probability density \(p(x)\) in some D-dimensional space, we want to maximize \(p(x)\)</li>
+<li>Consider some small region \(\mathcal{R}\) containing \(x\), whose associated probability mass is:
+$$
+p = \int_{\mathcal{R}} p(x) dx 
+$$</li>
+<li>Now suppose we have collected a data set comprising of:
+<ul>
+<li>\(N\): number of observations collected from \(p(x)\)</li>
+</ul></li>
+<li>Because each data points has probability \(p\) of landing in \(\mathcal{R}\) the total number, \(k\), of points lie inside \(\mathcal{R}\) will be distributed via binomial distribution:
+$$
+Bin(k|N,p) = \frac{N!}{k!(N-k)!} p^k(1-p)^{N-k}
+$$</li>
+<li>For larger \(N\);
+$$
+\mathbb{E}(x) = p
+$$</li>
+<li>While given some volume \(v\) of \(\mathcal{R}\)  since \(p \cong p(x)v\) for small region \(\mathcal{R}\) we can obtain the density estimation as:
+$$
+p(x) = \frac{k}{Nv}
+$$</li>
+<li>This is the general density estimator</li>
+<li><p>Given this we can design an estimator in 2 different ways:</p>
+
+<ul>
+<li>We can fix \(k\) and determine the value of \(v\) from the data which gives rise to the \(k\)-nearest neighbor density estimator</li>
+<li>Or we can fix \(v\) and determine \(k\) from the data: kernel density estimator 
+<h1>Kernel Function</h1></li>
+</ul></li>
+<li><p>in order to determine the number of K points falling within a specific region \(\mathcal{R}\) it is convenient to define the following function
+$$
+k(u) = \begin{cases}
+1, |\mu_{i}|\leq \frac{1}{2} \quad i= 1,2,...,D\ \
+0, \quad otherwise
+\end{cases}
+$$</p></li>
+<li>\(k(u)\) is an example of a kernel function specifically called a <strong>Parzen Window</strong></li>
+</ul>
+
+<h2>Hypercube kernel density estimator:</h2>
+
+<ul>
+<li>Using the hypercube kernel function, the density estimator at \(x\) turns out to be:
+$$
+p(x) = \frac{1}{N} \sum\limits_{n=1}^{N} \frac{1}{h^{D}}k(\frac{x-x_{n}}{h})
+$$</li>
+<li>Where \(h^D\) denote the volume of the hypercube of size \(h\) in the D-dimensional space</li>
+</ul>
+
+<h2>Gaussian Kernel Density Estimator:</h2>
+
+<ul>
+<li>Density Estimator:
+$$
+p(x) = \frac{1}{N} \sum\limits_{n=1}^{N} \frac{1}{(2\pi h^{2})^{D/2}}exp{\frac{||x-x_{n}||^{2}}{2h^{2}}}
+$$</li>
+<li>\(h\): standard deviation</li>
+</ul>
+
+</body>
+</html>
