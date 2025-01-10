@@ -55,17 +55,67 @@ public:
         <section id="leetcode-daily">
             <h2>12/19/2024</h2>
             <article>
-                <p><strong>Problem:</strong> 
+                <p><strong>Problem: 769. Max Chunks To Make Sorted</strong> 
                 </p>
                 <h4>Solution:</h4>
                 <pre>
-<code>
-
-</code>
+                    <code>
+class Solution {
+public:
+    int maxChunksToSorted(vector<int>& arr) {
+        int count = 0, diff = 0;
+                                    
+        for(int i = 0; i < arr.size(); i++) {
+            diff += arr[i] - i;
+            count += (diff == 0);
+        }
+        
+        return count;
+    }
+};
+                        </code>
                 </pre>
                 <p><strong>Explanation:</strong></p>
                 <ul>
-                    <li>Create a map to store the indices of elements.</li>
+                    <li>Essentally just need to calculate the difference between the current element and its index and track when this difference is zero, which indicates that a chunk can be sorted independently.</li>
+                 
+                </ul>
+            </article>
+        </section>
+          
+        <section id="leetcode-daily">
+            <h2>12/20/2024</h2>
+            <article>
+                <p><strong>Problem: 2415. Reverse Odd Levels of Binary Tree</strong> 
+                </p>
+                <h4>Solution:</h4>
+                <pre>
+                    <code>
+class Solution {
+public:
+    TreeNode* reverseOddLevels(TreeNode* root) {
+        dfs(root->left, root->right, 1);
+        return root;
+    }
+private:
+    void dfs(TreeNode* leftNode, TreeNode* rightNode, int level){
+        if(!leftNode || !rightNode) {
+            return;
+            } 
+                            
+        if(level % 2){
+            swap(leftNode->val, rightNode->val);
+            } 
+                            
+        dfs(leftNode->left, rightNode->right, level+1);
+        dfs(leftNode->right, rightNode->left, level+1);
+    }
+};
+                        </code>
+                </pre>
+                <p><strong>Explanation:</strong></p>
+                <ul>
+                    <li></li>
                  
                 </ul>
             </article>
